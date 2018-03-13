@@ -1,0 +1,45 @@
+{
+	"nombreProyecto": "webexample01",
+	"ubicacionProyecto": "I:\\proyectos\\java\\gitProyects/",
+	"rutamvn": "/src/main/java/",
+	"clases": [
+		{
+			"paqueteria": "com.martinez.proyectoVentas",
+			"nombre": "Archivo3",
+			"atributos": [
+				{
+					"clase": "java.lang.String",
+					"nombre": "nombre",
+					"isset": true,
+					"isget": true,
+					"automatico": "\"\""
+				},
+				{
+					"clase": "java.lang.String",
+					"nombre": "apellido",
+					"isset": true,
+					"isget": true
+				}
+			]
+		},
+		{
+			"paqueteria": "com.martinez.proyectoVentas",
+			"nombre": "Archivo4",
+			"atributos": [
+				{
+					"clase": "java.lang.String",
+					"nombre": "nombre",
+					"isset": true,
+					"isget": true,
+					"automatico": "\"\""
+				},
+				{
+					"clase": "java.lang.String",
+					"nombre": "apellido",
+					"isset": true,
+					"isget": true
+				}
+			]
+		}
+	]
+}

@@ -5,6 +5,8 @@ import java.util.List;
 
 public class ProyectoBean {
 	private String nombreProyecto;
+	private String ubicacionProyecto;
+	private String rutamvn ;
 	private List<ClaseBean> clases;
 	public String getNombreProyecto() {
 		return nombreProyecto;
@@ -20,5 +22,17 @@ public class ProyectoBean {
 	}
 	public void setClases(List<ClaseBean> clases) {
 		this.clases = clases;
+	}
+	public String getUbicacionProyecto() {
+		return ubicacionProyecto;
+	}
+	public void setUbicacionProyecto(String ubicacionProyecto) {
+		this.ubicacionProyecto = ubicacionProyecto;
+	}
+	public String getRutamvn() {
+		return rutamvn;
+	}
+	public void setRutamvn(String rutamvn) {
+		this.rutamvn = rutamvn;
 	}
 }

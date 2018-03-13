@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
 import com.jmartinez.bean.AtributosBean;
 import com.jmartinez.bean.ClaseBean;
 import com.jmartinez.bean.ProyectoBean;
@@ -24,9 +25,9 @@ public class CrearClaseJavav2 {
 		System.out.println("Automatización de un proyecto Java");
 		System.out.println("Carperta de creación. Nombre de proyecto");
 		ProyectoBean proy = new ProyectoBean();
-		String ubicacionProyecto = "../";
 		proy.setNombreProyecto("ProyectoVentas");
-		String rutamvn = "/src/main/java/";
+		proy.setUbicacionProyecto("../");
+		proy.setRutamvn("/src/main/java/");
 		ClaseBean archivobean = new ClaseBean();
 		archivobean.setNombre("archivoBean");
 		archivobean.setPaqueteria("com.martinez.proyectoVentas.bean");
@@ -43,10 +44,26 @@ public class CrearClaseJavav2 {
 		archivobean.setAtributos(atributos );
 		List<ClaseBean> clases = new ArrayList<>();
 		clases.add(archivobean);
+		ClaseBean archivobean2 = new ClaseBean();
+		archivobean2.setNombre("archivoBean2");
+		archivobean2.setPaqueteria("com.martinez.proyectoVentas.bean");
+		archivobean2.setAtributos(atributos );
+		clases.add(archivobean2);
 		proy.setClases(clases );
+		Gson gson = new Gson();
+		String json = gson.toJson(proy);
+		//response = gson.fromJson(valor, BuscaRazonSocialResponse.class);
+		System.out.println("json: "+json);
+		/*** {"nombreProyecto":"ProyectoVentas","ubicacionProyecto":"../","rutamvn":"/src/main/java/",
+		 * "clases":[{"paqueteria":"com.martinez.proyectoVentas.bean","nombre":"archivoBean",
+		 * "atributos":[{"clase":"java.lang.String","nombre":"nombre","isset":true,"isget":true,"automatico":"\"\""},
+		 * {"clase":"java.lang.String","nombre":"apellido","isset":true,"isget":true}]},
+		 * {"paqueteria":"com.martinez.proyectoVentas.bean","nombre":"archivoBean2",
+		 * "atributos":[{"clase":"java.lang.String","nombre":"nombre","isset":true,"isget":true,"automatico":"\"\""},
+		 * {"clase":"java.lang.String","nombre":"apellido","isset":true,"isget":true}]}]}**/
 		System.out.println("cantidad de archivos a crear"+proy.getClases().size());
 		for (ClaseBean clase : proy.getClases()) {
-			String prefixfile = ubicacionProyecto + proy.getNombreProyecto() + rutamvn + clase.getPaqueteria().replace(".", "/") + "/";
+			String prefixfile = proy.getUbicacionProyecto() + proy.getNombreProyecto() + proy.getRutamvn() + clase.getPaqueteria().replace(".", "/") + "/";
 			System.out.println("ruta : " + prefixfile);
 			// Falta crear la carperta y sub directorios correctamente
 			prefixfile = "../";
@@ -77,7 +94,6 @@ public class CrearClaseJavav2 {
 					informacion += "\t"+"\t"+"this."+atributo.getNombre()+" = "+atributo.getNombre()+";"+"\n";
 					informacion += "\t"+"}"+"\n";
 				}
-				
 			}
 			informacion += "\n";
 			informacion += "}";
@@ -86,8 +102,5 @@ public class CrearClaseJavav2 {
 			System.out.println(""+clase.getNombre() + ": creada correctamente");
 		}
 		
-		
-		
-
 	}
 }

@@ -2,11 +2,21 @@ package com.jmartinez.bean;
 
 public class AtributosBean {
 	
+	//Tipo de Clase en Java
 	private String clase;
+	//Nombre de atributo
 	private String nombre;
+	
 	private boolean isset = true;
 	private boolean isget = true;
+	//Asignación de valor por defecto
 	private String automatico;
+	//Para mostrar en la grilla de listado
+	private boolean verSelect;
+	//Para mostrar en la grilla de Nuevo
+	private boolean verNuevo;
+	//Para mostrar en la grilla de actualizacion
+	private boolean verActualizar;
 	
 	public String getClase() {
 		return clase;
