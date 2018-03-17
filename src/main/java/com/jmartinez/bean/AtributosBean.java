@@ -4,11 +4,13 @@ public class AtributosBean {
 	
 	//Tipo de Clase en Java
 	private String clase;
+	private String claseDB;
 	//Nombre de atributo
 	private String nombre;
 	
 	private boolean isset = true;
 	private boolean isget = true;
+	private boolean ispk = false;
 	//Asignación de valor por defecto
 	private String automatico;
 	//Para mostrar en la grilla de listado
@@ -60,6 +62,36 @@ public class AtributosBean {
 	}
 	public void setAutomatico(String automatico) {
 		this.automatico = automatico;
+	}
+	public boolean isVerSelect() {
+		return verSelect;
+	}
+	public void setVerSelect(boolean verSelect) {
+		this.verSelect = verSelect;
+	}
+	public boolean isVerNuevo() {
+		return verNuevo;
+	}
+	public void setVerNuevo(boolean verNuevo) {
+		this.verNuevo = verNuevo;
+	}
+	public boolean isVerActualizar() {
+		return verActualizar;
+	}
+	public void setVerActualizar(boolean verActualizar) {
+		this.verActualizar = verActualizar;
+	}
+	public String getClaseDB() {
+		return claseDB;
+	}
+	public void setClaseDB(String claseDB) {
+		this.claseDB = claseDB;
+	}
+	public boolean isIspk() {
+		return ispk;
+	}
+	public void setIspk(boolean ispk) {
+		this.ispk = ispk;
 	}
 	
 	

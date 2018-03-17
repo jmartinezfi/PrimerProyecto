@@ -5,29 +5,40 @@
 	"clases": [
 		{
 			"paqueteria": "com.martinez.proyectoVentas",
-			"nombre": "Archivo3",
+			"nombre": "Categoria",
 			"atributos": [
+			{
+					"clase": "int",
+					"claseDB" : "Int",
+					"nombre": "codCategoria",
+					"ispk": true
+				},
 				{
 					"clase": "java.lang.String",
+					"claseDB" : "String",
 					"nombre": "nombre",
-					"isset": true,
-					"isget": true,
 					"automatico": "\"\""
 				},
 				{
 					"clase": "java.lang.String",
-					"nombre": "apellido",
-					"isset": true,
-					"isget": true
+					"claseDB" : "String",
+					"nombre": "descripcion"
+				}
+				,
+				{
+					"clase": "java.lang.String",
+					"claseDB" : "String",
+					"nombre": "estado"
 				}
 			]
 		},
 		{
 			"paqueteria": "com.martinez.proyectoVentas",
-			"nombre": "Archivo4",
+			"nombre": "Marca",
 			"atributos": [
 				{
 					"clase": "java.lang.String",
+					"claseDB" : "String",
 					"nombre": "nombre",
 					"isset": true,
 					"isget": true,
@@ -36,6 +47,7 @@
 				{
 					"clase": "java.lang.String",
 					"nombre": "apellido",
+					"claseDB" : "String",
 					"isset": true,
 					"isget": true
 				}
