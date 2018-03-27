@@ -122,23 +122,28 @@ public class CrearClaseJavav3 {
 	private static String updateDao(ClaseBean clase) {
 		String funcionalidad = "\t\t\tString sql = \"update "+clase.getNombre()+" set \" ;\n";
 		
-		int i = 1;
 		String nombres = "";
-		String indices = "";
+		String post = "";
+		String primary = "";
+		String primarypost = "";
 		for (AtributosBean element : clase.getAtributos()) {
-			nombres +=element.getNombre()+",";
-			indices +="?,";
-			funcionalidad += "\t\t\tpstm.set"+element.getClaseDB()+"("+i+", dato.get"+element.getNombreClase()+"());\n";
-			i++;
-			element.getNombre();
+			if(element.isIspk()) {
+				primary = "\t\t\tsql += \" where  "+element.getNombre()+" = ? \" ; \n";
+				primarypost += "\t\t\tpstm.set"+element.getClaseDB()+"(i++, dato.get"+element.getNombreClase()+"());\n";
+			}else {
+				nombres += "\t\t\tif(null!= dato.get"+element.getNombreClase()+"())\n";
+				nombres += "\t\t\t\tsql += \" "+element.getNombre()+" = ? ,\";\n";
+				post += "\t\t\tif(null!= dato.get"+element.getNombreClase()+"())\n";
+				post += "\t\t\t\tpstm.set"+element.getClaseDB()+"(i++, dato.get"+element.getNombreClase()+"());\n";
+			}
 		}
+		funcionalidad += nombres;
+		funcionalidad += "\t\t\tsql = sql.substring(0, sql.length()-1);\n";
+		funcionalidad +=primary;
 		funcionalidad += "\t\t\tpstm = conn.prepareStatement(sql);\n";
-		
-		
-		nombres = nombres.substring(0, nombres.length()-1);
-		indices = indices.substring(0, indices.length()-1);
-		funcionalidad = funcionalidad.replace("<<nombres>>", nombres);
-		funcionalidad = funcionalidad.replace("<<indices>>", indices);
+		funcionalidad += "\t\t\tint i = 1;\n";
+		funcionalidad +=post;
+		funcionalidad +=primarypost;
 		return funcionalDao(funcionalidad);
 	}
 	

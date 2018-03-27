@@ -37,6 +37,12 @@
 			"nombre": "Marca",
 			"atributos": [
 				{
+					"clase": "int",
+					"claseDB" : "Int",
+					"nombre": "codMarca",
+					"ispk": true
+				},
+				{
 					"clase": "java.lang.String",
 					"claseDB" : "String",
 					"nombre": "nombre",
