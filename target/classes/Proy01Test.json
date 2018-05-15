@@ -40,22 +40,36 @@
 					"clase": "int",
 					"claseDB" : "Int",
 					"nombre": "codMarca",
-					"ispk": true
+					"ispk": true,
+					"isform" : true,
+					"elemento" : "input",
+					"type" : "hidden"
 				},
 				{
 					"clase": "java.lang.String",
 					"claseDB" : "String",
 					"nombre": "nombre",
-					"isset": true,
-					"isget": true,
-					"automatico": "\"\""
+					"automatico": "\"\"",
+					"isform" : true,
+					"elemento" : "input",
+					"type" : "text"
 				},
 				{
 					"clase": "java.lang.String",
 					"nombre": "apellido",
 					"claseDB" : "String",
+					"isform" : true,
+					"elemento" : "input",
+					"type" : "text"
+				},
+				{
+					"clase": "java.lang.String",
+					"nombre": "estado",
+					"automatico": "\"\"",
+					"claseDB" : "String",
 					"isset": true,
-					"isget": true
+					"isget": true,
+					"isform" : false
 				}
 			]
 		}

@@ -26,7 +26,8 @@ public class CrearClaseJavav3 {
 			if (proy != null) {
 				// Creacion de proyecto
 				System.out.println("Nombre:" + proy.getNombreProyecto());
-				System.out.println("cantidad de archivos a crear" + proy.getClases().size());
+				System.out.println("cantidad de archivos a crear: " + proy.getClases().size());
+				//Crear paqueteria
 				for (ClaseBean clase : proy.getClases()) {
 					crearBean(proy, clase);
 					creanDAO(proy, clase);
@@ -56,7 +57,7 @@ public class CrearClaseJavav3 {
 		informacion += "\tpublic void insertSelective ("+nombreBean+" dato);\n";
 		informacion += "\tpublic void update ("+nombreBean+" dato);\n";
 		informacion += "\tpublic void updateSelective ("+nombreBean+" dato);\n";
-		informacion += "\tpublic java.util.ArrayList<"+nombreBean+"> select();\n";
+		informacion += "\tpublic "+nombreBean+" selectOne("+nombreBean+" dato);\n";
 		informacion += "\tpublic java.util.ArrayList<"+nombreBean+"> select(java.lang.String filtro);\n";
 		informacion += "\n";
 		informacion += "}";
@@ -89,16 +90,51 @@ public class CrearClaseJavav3 {
 		informacion += "\tpublic void updateSelective ("+nombreBean+" dato){\n";
 		informacion += updateDao(clase);
 		informacion += "\t}\n";
-		informacion += "\tpublic java.util.ArrayList<"+nombreBean+"> select(){return null;}\n";
-		informacion += "\tpublic java.util.ArrayList<"+nombreBean+"> select(java.lang.String filtro){"
-				+ "return null;}\n";
-		informacion += "\n";
+		informacion += "\tpublic "+nombreBean+" selectOne("+nombreBean+" dato){\n"; //return null;}
+		informacion += selectOne(clase,nombreBean);
+		informacion += "\t}\n";
+		informacion += "\tpublic java.util.ArrayList<"+nombreBean+"> select(java.lang.String filtro){\n";
+		informacion += selectDao(clase,nombreBean);
+		informacion += "\t}\n";
 		informacion += "}";
 		bw.write(informacion);
 		bw.close();
 		System.out.println("" + clase.getNombre() + ": creada correctamente");
 	}
-	
+	private static String selectOne(ClaseBean clase, String nombreBean) {
+		String filtro = "\t\t\tString sql = \"Select * from "+clase.getNombre()+" \" ;\n";
+		String funcionalidad = "";
+		funcionalidad += "\t\t\trs = pstm.executeQuery();\n";
+		funcionalidad += "\t\t\twhile(rs.next()){\n";
+		for (AtributosBean element : clase.getAtributos()) {
+			if(element.isIspk()) {
+				filtro += "\t\t\tsql += \" where "+element.getNombreClase()+" =  ? \";\n";
+				filtro += "\t\t\tpstm = conn.prepareStatement(sql);\n"; 
+				filtro += "\t\t\tpstm.set"+element.getClaseDB()+"(1, dato.get"+element.getNombreClase()+"());\n";
+			}
+			funcionalidad +="\t\t\t\tlistado.set"+element.getNombreClase()+"(rs.get"+element.getClaseDB()+"(\""+element.getNombreClase()+"\"));\n";
+		}
+		funcionalidad += "\t\t\t}\n";
+		String inicial = "       "+nombreBean+" listado = new "+nombreBean+"();\n" ;
+		return funcionalSDao(inicial,filtro + funcionalidad,nombreBean);
+	}
+	private static String selectDao(ClaseBean clase, String nombreBean) {
+		String funcionalidad = "";
+		funcionalidad  += "\t\t\tString sql = \"Select * from "+clase.getNombre()+" \";\n";
+		funcionalidad += "\t\t\tif(filtro!=null&&!filtro.isEmpty())\n"; 
+		funcionalidad += "\t\t\t\tsql += filtro;\n"; 
+		funcionalidad += "\t\t\tpstm = conn.prepareStatement(sql);\n"; 
+		funcionalidad += "\t\t\trs = pstm.executeQuery();\n";
+		funcionalidad += "\t\t\twhile(rs.next()){\n";
+		funcionalidad += "\t\t\t\t"+nombreBean+ " idato = new "+nombreBean+"();\n";
+		for (AtributosBean element : clase.getAtributos()) {
+			funcionalidad +="\t\t\t\tidato.set"+element.getNombreClase()+"(rs.get"+element.getClaseDB()+"(\""+element.getNombreClase()+"\"));\n";
+		}
+		funcionalidad += "\t\t\t\tlistado.add(idato);\n";
+		funcionalidad += "\t\t\t}\n";
+		String inicial = "       java.util.ArrayList<"+nombreBean+"> listado = new java.util.ArrayList<"+nombreBean+">();\n" ;
+		return funcionalSDao(inicial,funcionalidad,nombreBean);
+	}
 	private static String insertDao(ClaseBean clase) {
 		String funcionalidad = "\t\t\tString sql = \"insert into "+clase.getNombre()+"(<<nombres>>) values(<<indices>>)\" ; \n";
 		funcionalidad += "\t\t\tpstm = conn.prepareStatement(sql);\n"; 
@@ -174,9 +210,49 @@ public class CrearClaseJavav3 {
 		return datos;
 	}
 	
+	private static String funcionalSDao(String variable, String datos, String nombreBean) {
+		
+		datos = variable+ 
+				"       java.sql.Connection conn = null;\r\n" + 
+				"		java.sql.PreparedStatement pstm  = null;\r\n" +
+				"		java.sql.ResultSet rs = null;\r\n" + 
+				"		try {\r\n" + 
+				"			conn = getConexion();\r\n" + datos +
+				"		} catch (java.sql.SQLException e) {\r\n" + 
+				"			e.printStackTrace();\r\n" + 
+				"		} catch (Exception e) {\r\n" + 
+				"			e.printStackTrace();\r\n" + 
+				"		} finally {\r\n" + 
+				"			try {\r\n" + 
+				"				if (rs != null)\r\n" + 
+				"					rs.close();\r\n" + 
+				"			} catch (java.sql.SQLException e) {\r\n" + 
+				"				e.printStackTrace();\r\n" + 
+				"			}\r\n" +
+				"			try {\r\n" + 
+				"				if (pstm != null)\r\n" + 
+				"					pstm.close();\r\n" + 
+				"			} catch (java.sql.SQLException e) {\r\n" + 
+				"				e.printStackTrace();\r\n" + 
+				"			}\r\n" +
+				"			try {\r\n" + 
+				"				if (conn != null)\r\n" + 
+				"					conn.close();\r\n" + 
+				"			} catch (java.sql.SQLException e) {\r\n" + 
+				"				e.printStackTrace();\r\n" + 
+				"			}\r\n" + 
+				"		}\n"+
+				"		return listado;\n" ;
+		return datos;
+	}
+	
+	
 	private static void crearBean(ProyectoBean proy, ClaseBean clase) throws IOException {
 		String prefixfile = proy.getUbicacionProyecto() + proy.getNombreProyecto() + proy.getRutamvn()
 				+ clase.getPaqueteria().replace(".", "/") + "/";
+		//File directorio = new File(prefixfile);
+		//directorio.mkdirs();
+		System.out.println("prefixfile:"+prefixfile);
 		String nombreClase = clase.getNombre();
 		File archivo = new File(prefixfile + "bean/" + nombreClase + "Bean.java");
 		String informacion = "";

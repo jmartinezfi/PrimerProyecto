@@ -20,6 +20,14 @@ public class AtributosBean {
 	//Para mostrar en la grilla de actualizacion
 	private boolean verActualizar;
 	
+	//Indicar si se muestra en el formulario
+	private boolean isform; 
+	//indica el elemento en el formulario
+	private String elemento;
+	//tipo de elemento
+	private String type;
+	
+	
 	public String getClase() {
 		return clase;
 	}
@@ -92,6 +100,24 @@ public class AtributosBean {
 	}
 	public void setIspk(boolean ispk) {
 		this.ispk = ispk;
+	}
+	public boolean isIsform() {
+		return isform;
+	}
+	public void setIsform(boolean isform) {
+		this.isform = isform;
+	}
+	public String getElemento() {
+		return elemento;
+	}
+	public void setElemento(String elemento) {
+		this.elemento = elemento;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	
