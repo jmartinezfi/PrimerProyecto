@@ -7,6 +7,9 @@ public class ProyectoBean {
 	private String nombreProyecto;
 	private String ubicacionProyecto;
 	private String rutamvn ;
+	private String rutamvnw;
+	private String rutamvnf;
+	private String paqueteria ;
 	private List<ClaseBean> clases;
 	public String getNombreProyecto() {
 		return nombreProyecto;
@@ -34,5 +37,23 @@ public class ProyectoBean {
 	}
 	public void setRutamvn(String rutamvn) {
 		this.rutamvn = rutamvn;
+	}
+	public String getPaqueteria() {
+		return paqueteria;
+	}
+	public void setPaqueteria(String paqueteria) {
+		this.paqueteria = paqueteria;
+	}
+	public String getRutamvnw() {
+		return rutamvnw;
+	}
+	public void setRutamvnw(String rutamvnw) {
+		this.rutamvnw = rutamvnw;
+	}
+	public String getRutamvnf() {
+		return rutamvnf;
+	}
+	public void setRutamvnf(String rutamvnf) {
+		this.rutamvnf = rutamvnf;
 	}
 }

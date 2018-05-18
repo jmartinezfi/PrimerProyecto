@@ -2,74 +2,94 @@
 	"nombreProyecto": "webexample01",
 	"ubicacionProyecto": "I:\\proyectos\\java\\gitProyects/",
 	"rutamvn": "/src/main/java/",
+	"rutamvnw": "/src/main/webapp/",
+	"rutamvnf" : "/src/main/resources/",
+	"paqueteria": "com.martinez.proyectoVentas",
 	"clases": [
 		{
-			"paqueteria": "com.martinez.proyectoVentas",
-			"nombre": "Categoria",
+			"nombre": "Resultado",
+			"oBean" : true,
 			"atributos": [
-			{
+				{
+					"clase": "String",
+					"nombre": "codigo"
+				},
+				{
+					"clase": "String",
+					"nombre": "descripcion"
+				},
+				{
+					"clase": "Object",
+					"nombre": "valor"
+				},
+				{
+					"clase": "String",
+					"nombre": "html"
+				}
+			]
+		},
+		{
+			"nombre": "Categoria",
+			"filtro":"nombre",
+			"atributos": [
+				{
 					"clase": "int",
-					"claseDB" : "Int",
 					"nombre": "codCategoria",
 					"ispk": true
 				},
 				{
-					"clase": "java.lang.String",
-					"claseDB" : "String",
+					"clase": "String",
 					"nombre": "nombre",
 					"automatico": "\"\""
 				},
 				{
-					"clase": "java.lang.String",
-					"claseDB" : "String",
+					"clase": "String",
 					"nombre": "descripcion"
-				}
-				,
+				},
 				{
-					"clase": "java.lang.String",
-					"claseDB" : "String",
+					"clase": "String",
+					"nombre": "detalle"
+				},
+				{
+					"clase": "String",
 					"nombre": "estado"
 				}
 			]
 		},
 		{
-			"paqueteria": "com.martinez.proyectoVentas",
 			"nombre": "Marca",
+			"filtro":"nombre",
 			"atributos": [
 				{
 					"clase": "int",
-					"claseDB" : "Int",
 					"nombre": "codMarca",
 					"ispk": true,
-					"isform" : true,
-					"elemento" : "input",
-					"type" : "hidden"
+					"isform": true,
+					"elemento": "input",
+					"type": "hidden"
 				},
 				{
-					"clase": "java.lang.String",
-					"claseDB" : "String",
+					"clase": "String",
 					"nombre": "nombre",
 					"automatico": "\"\"",
-					"isform" : true,
-					"elemento" : "input",
-					"type" : "text"
+					"isform": true,
+					"elemento": "input",
+					"type": "text"
 				},
 				{
-					"clase": "java.lang.String",
+					"clase": "String",
 					"nombre": "apellido",
-					"claseDB" : "String",
-					"isform" : true,
-					"elemento" : "input",
-					"type" : "text"
+					"isform": true,
+					"elemento": "input",
+					"type": "text"
 				},
 				{
-					"clase": "java.lang.String",
+					"clase": "String",
 					"nombre": "estado",
 					"automatico": "\"\"",
-					"claseDB" : "String",
 					"isset": true,
 					"isget": true,
-					"isform" : false
+					"isform": false
 				}
 			]
 		}

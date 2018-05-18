@@ -7,6 +7,9 @@ public class ClaseBean {
 
 	private String paqueteria;
 	private String nombre;
+	private boolean oBean;
+	//nombre del atributo para los filtros
+	private String filtro; 
 	private List<AtributosBean> atributos = new ArrayList<>();
 	public String getPaqueteria() {
 		return paqueteria;
@@ -25,6 +28,18 @@ public class ClaseBean {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	public boolean isoBean() {
+		return oBean;
+	}
+	public void setoBean(boolean oBean) {
+		this.oBean = oBean;
+	}
+	public String getFiltro() {
+		return filtro;
+	}
+	public void setFiltro(String filtro) {
+		this.filtro = filtro;
 	}
 	
 	

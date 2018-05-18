@@ -89,8 +89,35 @@ public class AtributosBean {
 	public void setVerActualizar(boolean verActualizar) {
 		this.verActualizar = verActualizar;
 	}
-	public String getClaseDB() {
+	public String getClaseSQL() {
+		if("int".equalsIgnoreCase(getClase())) {
+			return "int(11)";
+		}
+		if("String".equalsIgnoreCase(getClase())) {
+			return "varchar(100)";
+		}
 		return claseDB;
+	}
+	public String getClaseDB() {
+		if("int".equalsIgnoreCase(getClase())) {
+			return "Int";
+		}
+		if("String".equalsIgnoreCase(getClase())) {
+			return "String";
+		}
+		return claseDB;
+	}
+	public String getClasePRIn() {
+		if("int".equalsIgnoreCase(getClase())) {
+			return "Integer.parseInt(";
+		}
+		return "";
+	}
+	public String getClasePROut() {
+		if("int".equalsIgnoreCase(getClase())) {
+			return ")";
+		}
+		return "";
 	}
 	public void setClaseDB(String claseDB) {
 		this.claseDB = claseDB;
