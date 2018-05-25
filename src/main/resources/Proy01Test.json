@@ -3,12 +3,12 @@
 	"ubicacionProyecto": "I:\\proyectos\\java\\gitProyects/",
 	"rutamvn": "/src/main/java/",
 	"rutamvnw": "/src/main/webapp/",
-	"rutamvnf" : "/src/main/resources/",
+	"rutamvnf": "/src/main/resources/",
 	"paqueteria": "com.martinez.proyectoVentas",
 	"clases": [
 		{
 			"nombre": "Resultado",
-			"oBean" : true,
+			"oBean": true,
 			"atributos": [
 				{
 					"clase": "String",
@@ -30,7 +30,7 @@
 		},
 		{
 			"nombre": "Categoria",
-			"filtro":"nombre",
+			"filtro": "Nombre",
 			"atributos": [
 				{
 					"clase": "int",
@@ -58,13 +58,12 @@
 		},
 		{
 			"nombre": "Marca",
-			"filtro":"nombre",
+			"filtro": "Nombre",
 			"atributos": [
 				{
 					"clase": "int",
 					"nombre": "codMarca",
 					"ispk": true,
-					"isform": true,
 					"elemento": "input",
 					"type": "hidden"
 				},
@@ -72,24 +71,63 @@
 					"clase": "String",
 					"nombre": "nombre",
 					"automatico": "\"\"",
-					"isform": true,
 					"elemento": "input",
 					"type": "text"
 				},
 				{
 					"clase": "String",
 					"nombre": "apellido",
-					"isform": true,
-					"elemento": "input",
-					"type": "text"
+					"elemento": "input"
 				},
 				{
 					"clase": "String",
 					"nombre": "estado",
 					"automatico": "\"\"",
-					"isset": true,
-					"isget": true,
 					"isform": false
+				}
+			]
+		},
+		{
+			"nombre": "Producto",
+			"filtro": "Nombre",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "codProducto",
+					"ispk": true,
+					"elemento": "input",
+					"type": "hidden"
+				},
+				{
+					"clase": "String",
+					"nombre": "nombre",
+					"automatico": "\"\"",
+					"elemento": "input",
+					"type": "text"
+				},
+				{
+					"clase": "String",
+					"nombre": "descripcion",
+					"elemento": "input",
+					"type": "text"
+				},
+				{
+					"clase": "int",
+					"nombre": "codMarca",
+					"elemento": "select", 
+					"servlet" :"Marca"
+				},
+				{
+					"clase": "int",
+					"nombre": "codCategoria",
+					"elemento": "select",
+					"servlet" :"Categoria"
+				},
+				{
+					"clase": "String",
+					"nombre": "estado",
+					"automatico": "\"\"",
+					"isform": true
 				}
 			]
 		}

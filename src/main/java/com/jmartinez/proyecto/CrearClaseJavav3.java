@@ -204,13 +204,17 @@ public class CrearClaseJavav3 {
 				primarypost += "\t\t\tpstm.set"+element.getClaseDB()+"(i++, dato.get"+element.getNombreClase()+"());\n";
 			}else {
 				
-				nombres += "\t\t\tif(null!= dato.get"+element.getNombreClase()+"()";
+				nombres += "\t\t\tif(";
+				nombres += element.getClase().equalsIgnoreCase("int")?"0":"null";
+				nombres +="!= dato.get"+element.getNombreClase()+"()";
 				if (!element.getAutomatico().isEmpty()) {
 					nombres += " && !dato.get"+element.getNombreClase()+"().isEmpty()";
 				}
 				nombres += ")\n";
 				nombres += "\t\t\t\tsql += \" "+element.getNombre()+" = ? ,\";\n";
-				post += "\t\t\tif(null!= dato.get"+element.getNombreClase()+"()";
+				post += "\t\t\tif(";
+				post += element.getClase().equalsIgnoreCase("int")?"0":"null";
+				post +="!= dato.get"+element.getNombreClase()+"()";
 				if (!element.getAutomatico().isEmpty()) {
 					post += " && !dato.get"+element.getNombreClase()+"().isEmpty()";
 				}
@@ -370,6 +374,7 @@ public class CrearClaseJavav3 {
 				"			String accion = request.getParameter(\"a\");";
 		informacion += "\n";
 		informacion += "\t\t\t"+nombreBean+" dato = new "+nombreBean+"();\n";
+		//Inicio de listado
 		informacion += "\t\t\tif (\"l\".equalsIgnoreCase(accion)) {\n";
 		informacion +="\t\t\t\t"+paqueteria+".dao."+clase.getNombre()+"Dao dao = new "+paqueteria+".dao."+clase.getNombre()+"DaoImpl();\n";
 		informacion +="				String filtro = \"\";\n";
@@ -413,7 +418,27 @@ public class CrearClaseJavav3 {
 				"					res.setHtml(html);\r\n" + 
 				"				}\r\n" + 
 				"				res.setDescripcion(\"Conforme Listar\");\n";
-		
+		//fin de listado
+		//Inicio de listado
+				informacion += "\t\t\t}else if (\"s\".equalsIgnoreCase(accion)) {\n";
+				informacion +="\t\t\t\t"+paqueteria+".dao."+clase.getNombre()+"Dao dao = new "+paqueteria+".dao."+clase.getNombre()+"DaoImpl();\n";
+				informacion +="				String filtro = \"\";\n";
+				informacion +="				filtro += \" order by <<nfiltro>> asc\";\n";
+				informacion = informacion.replace("<<nfiltro>>", clase.getFiltro());
+				informacion += "				ArrayList<"+nombreBean+"> lista = dao.select(filtro);\n";
+				informacion += "				String base = \"<option value='%s'>%s</option>\" ;\n";
+				informacion += "				if (lista != null && !lista.isEmpty()) {\r\n" + 
+						"					String html = \"\";\r\n" + 
+						"					int i = 0;\r\n" + 
+						"					while (i < lista.size()) {\r\n" + 
+						"						"+nombreBean+" idato = lista.get(i);\r\n" + 
+						"						html += String.format(base, idato.get"+elementId.getNombreClase()+"(),idato.get"+clase.getFiltro()+"());\r\n" + 
+						"						i++;\r\n" + 
+						"					}\r\n" + 
+						"					res.setHtml(html);\r\n" + 
+						"				}\r\n" + 
+						"				res.setDescripcion(\"Conforme Listar\");\n";
+				//fin de listado
 		informacion +="\t\t\t} else if (\"n\".equalsIgnoreCase(accion)) {\n";
 		informacion +="\t\t\t\t"+paqueteria+".dao."+clase.getNombre()+"Dao dao = new "+paqueteria+".dao."+clase.getNombre()+"DaoImpl();\n";
 		//
@@ -588,11 +613,19 @@ public class CrearClaseJavav3 {
 			informacion += 
 					"					<div class=\"form-group row\">\r\n" + 
 					"						<label for=\"Id"+element.getNombreClase()+"\" class=\"col-sm-2 col-form-label\">"+element.getNombreClase()+"</label>\r\n" + 
-					"						<div class=\"col-sm-10\">\r\n" + 
-					"							<input type=\"text\" class=\"form-control\" id=\"Id"+element.getNombreClase()+"\"\r\n" + 
-					"								placeholder=\""+element.getNombreClase()+"\" value=\"\" />\r\n" + 
+					"						<div class=\"col-sm-10\">\r\n" ;
+			if("select".equalsIgnoreCase(element.getElemento())) {
+				informacion +=
+						"							<select class=\"form-control\" id=\"Id"+element.getNombreClase()+"\"></select>\r\n";
+			}else {
+				informacion +=
+						"							<input type=\"text\" class=\"form-control\" id=\"Id"+element.getNombreClase()+"\"\r\n" + 
+						"								placeholder=\""+element.getNombreClase()+"\" value=\"\" />\r\n";
+			}
+			
+			informacion += 
 					"						</div>\r\n" + 
-					"					</div>\r\n" ;;
+					"					</div>\r\n" ;
 		}
 		informacion +=
 				"					<div class=\"form-group row\">\r\n" + 
@@ -808,7 +841,37 @@ public class CrearClaseJavav3 {
 				"			$('#formBusqueda').submit(function(event) {\r\n" + 
 				"				buscar();\r\n" + 
 				"				event.preventDefault();\r\n" + 
-				"			});\r\n" + 
+				"			});\r\n" ;
+			for (AtributosBean element : clase.getAtributos()) {
+				if("select".equalsIgnoreCase(element.getElemento())) {
+					informacion +="			try {\r\n" + 
+							"				$.ajax(\r\n" + 
+							"						{\r\n" + 
+							"							url : \""+element.getServlet()+"Servlet\",\r\n" + 
+							"							data : \"a=s\"\r\n" + 
+							"							,type : \"POST\"\r\n" + 
+							"						}).done(function(json) {\r\n" + 
+							"					if (json != null) {\r\n" + 
+							"						console.log(\"salida: \" + json.descripcion);\r\n" + 
+							"						//\r\n" + 
+							"						if (json.codigo == '2000') {\r\n" + 
+							"							$('#Id"+element.getNombreClase()+"').html(json.html);\r\n" + 
+							"						} else {\r\n" + 
+							"							alertE(json.descripcion);\r\n" + 
+							"						}\r\n" + 
+							"					} else {\r\n" + 
+							"						console.log(\"Error al obtener resultados\");\r\n" + 
+							"					}\r\n" + 
+							"				}).fail(function(xhr, status, errorThrown) {\r\n" + 
+							"					alertP(\"Error! Problemas al Terminar\");\r\n" + 
+							"				}).always(function(xhr, status) {\r\n" + 
+							"				});\r\n" + 
+							"			} catch (e) {\r\n" + 
+							"				alertP(e);\r\n" + 
+							"			}\n";
+				}
+			}
+			informacion +=
 				"		});\r\n" + 
 				"	</script>\r\n" + 
 				"</body>\r\n" + 

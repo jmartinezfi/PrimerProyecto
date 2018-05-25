@@ -27,6 +27,7 @@ public class AtributosBean {
 	//tipo de elemento
 	private String type;
 	
+	private String servlet;
 	
 	public String getClase() {
 		return clase;
@@ -145,6 +146,12 @@ public class AtributosBean {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	public String getServlet() {
+		return servlet;
+	}
+	public void setServlet(String servlet) {
+		this.servlet = servlet;
 	}
 	
 	
