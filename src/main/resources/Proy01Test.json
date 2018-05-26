@@ -52,7 +52,8 @@
 				},
 				{
 					"clase": "String",
-					"nombre": "estado"
+					"nombre": "estado",
+					"isform": true
 				}
 			]
 		},
@@ -83,7 +84,7 @@
 					"clase": "String",
 					"nombre": "estado",
 					"automatico": "\"\"",
-					"isform": false
+					"isform": true
 				}
 			]
 		},

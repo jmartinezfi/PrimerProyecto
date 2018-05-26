@@ -387,10 +387,10 @@ public class CrearClaseJavav3 {
 		informacion = informacion.replace("<<nfiltro>>", clase.getFiltro());
 		informacion += "				ArrayList<"+nombreBean+"> lista = dao.select(filtro);\n";
 		informacion += "				String base = \"<tr>";
-		int i = 0;
-		while(i<clase.getAtributos().size()) {
-			informacion += "<td>%s</td>";
-			i++;
+		for (AtributosBean element : clase.getAtributos()) {
+			if(!element.isIsform()) {
+				informacion += "<td>%s</td>";	
+			}
 		}
 		informacion += "\"+ \"<td><button type='button' class='btn btn-info px-3' onClick='return Clickbtn_Editar(%s);' ><i class='fa fa-search-plus' aria-hidden='true'></i></button>\"\r\n" + 
 				"						+ \"<button type='button' class='btn btn-danger px-3' onClick='return Clickbtn_Eliminar(%s);' ><i class='fa fa-times-circle' aria-hidden='true'></i></button>\"\r\n" + 
@@ -405,11 +405,14 @@ public class CrearClaseJavav3 {
 		String id = "";
 		AtributosBean elementId = null;
 		for (AtributosBean element : clase.getAtributos()) {
-			if(element.isIspk()) {
-				id = "idato.get"+element.getNombreClase()+"()";
-				elementId = element;
+			if(!element.isIsform()) {
+				if(element.isIspk()) {
+					id = "idato.get"+element.getNombreClase()+"()";
+					elementId = element;
+				}
+				informacion += "idato.get"+element.getNombreClase()+"(),";
 			}
-			informacion += "idato.get"+element.getNombreClase()+"(),";
+			
 		}
 		informacion +=id+","+id;
 		informacion += ");\r\n" + 
@@ -581,7 +584,9 @@ public class CrearClaseJavav3 {
 				"							<thead>\r\n" + 
 				"								<tr>\r\n";
 		for (AtributosBean element : clase.getAtributos()) {
-			informacion += "									<th scope=\"col\">"+element.getNombreClase()+"</th>\r\n";
+			if(!element.isIsform()) {
+				informacion += "									<th scope=\"col\">"+element.getNombreClase()+"</th>\r\n";	
+			}
 		}
 		informacion += "									<th scope=\"col\">Acción</th>\r\n" + 
 				"								</tr>\r\n" + 
