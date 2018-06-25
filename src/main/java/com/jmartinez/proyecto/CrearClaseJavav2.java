@@ -27,7 +27,7 @@ public class CrearClaseJavav2 {
 		ProyectoBean proy = new ProyectoBean();
 		proy.setNombreProyecto("ProyectoVentas");
 		proy.setUbicacionProyecto("../");
-		proy.setRutamvn("/src/main/java/");
+		proy.setRutajava("/src/main/java/");
 		ClaseBean archivobean = new ClaseBean();
 		archivobean.setNombre("archivoBean");
 		archivobean.setPaqueteria("com.martinez.proyectoVentas.bean");
@@ -63,7 +63,7 @@ public class CrearClaseJavav2 {
 		 * {"clase":"java.lang.String","nombre":"apellido","isset":true,"isget":true}]}]}**/
 		System.out.println("cantidad de archivos a crear"+proy.getClases().size());
 		for (ClaseBean clase : proy.getClases()) {
-			String prefixfile = proy.getUbicacionProyecto() + proy.getNombreProyecto() + proy.getRutamvn() + clase.getPaqueteria().replace(".", "/") + "/";
+			String prefixfile = proy.getUbicacionProyecto() + proy.getNombreProyecto() + proy.getRutajava() + clase.getPaqueteria().replace(".", "/") + "/";
 			System.out.println("ruta : " + prefixfile);
 			// Falta crear la carperta y sub directorios correctamente
 			prefixfile = "../";

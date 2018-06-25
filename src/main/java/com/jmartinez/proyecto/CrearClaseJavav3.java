@@ -26,15 +26,17 @@ public class CrearClaseJavav3 {
 				System.out.println("Nombre:" + proy.getNombreProyecto());
 				System.out.println("cantidad de archivos a crear: " + proy.getClases().size());
 				//Crear paqueteria
+				int idSec = 0;
 				for (ClaseBean clase : proy.getClases()) {
 					crearBean(proy, clase);
 					System.out.println(clase.getNombre() + ":"+clase.isoBean());
 					if(!clase.isoBean()) {
-						creanSQL(proy, clase);
+						creanSQL(proy, clase, idSec);
 						creanDAO(proy, clase);
 						creanDAOImpl(proy, clase);
 						crearServlet(proy, clase);
 						crearHtml(proy,clase);
+						idSec++;
 					}
 				}
 				
@@ -45,8 +47,8 @@ public class CrearClaseJavav3 {
 			System.out.println("Archivo No encontrado");
 		}
 	}
-	private static void creanSQL(ProyectoBean proy, ClaseBean clase) throws IOException {
-		String prefixfile = proy.getUbicacionProyecto() + proy.getNombreProyecto() + proy.getRutamvnf();
+	private static void creanSQL(ProyectoBean proy, ClaseBean clase, int idSec) throws IOException {
+		String prefixfile = proy.getUbicacionProyecto() + proy.getNombreProyecto() + proy.getRutafile();
 		File directorio = new File(prefixfile);
 		directorio.mkdirs();
 		String nombreClase = clase.getNombre();
@@ -59,19 +61,22 @@ public class CrearClaseJavav3 {
 		for (AtributosBean element : clase.getAtributos()) {
 			if(element.isIspk()) 
 				ipk = element;
-			informacion +="  `"+element.getNombre()+"` "+element.getClaseSQL()+" NOT NULL,\n";
+			if(element.isDb()) {
+				informacion +="  `"+element.getNombre()+clase.getAbreviatura()+"` "+element.getClaseSQL()+" NOT NULL,\n";	
+			}
 		}
 		informacion = informacion.substring(0, informacion.length()-2)+"\n";
 		informacion += ");\n";
 		if(ipk!=null) {
-			informacion +="ALTER TABLE `"+clase.getNombre()+"` ADD PRIMARY KEY (`"+ipk.getNombre()+"`);";
+			informacion +="ALTER TABLE `"+clase.getNombre()+"` ADD PRIMARY KEY (`"+ipk.getNombre()+clase.getAbreviatura()+"`);\n";
+			informacion +="INSERT INTO `sistema_secuencias` (`ID_SECUENCIA`, `TABLA`, `SECUENCIA`, `SISTEMA`) VALUES ("+idSec+", '"+ipk.getNombre()+clase.getAbreviatura()+"', '99', '1');";
 		}
 		bw.write(informacion);
 		bw.close();
 	}
 	
 	private static void creanDAO(ProyectoBean proy, ClaseBean clase) throws IOException {
-		String prefixfile = proy.getUbicacionProyecto() + proy.getNombreProyecto() + proy.getRutamvn()
+		String prefixfile = proy.getUbicacionProyecto() + proy.getNombreProyecto() + proy.getRutajava()
 				+ proy.getPaqueteria().replace(".", "/") + "/";
 		File directorio = new File(prefixfile+"dao/");
 		directorio.mkdirs();
@@ -85,7 +90,7 @@ public class CrearClaseJavav3 {
 		informacion += ";\n";
 		informacion += "public interface " + nombreClase + "Dao { " + "\n";
 		informacion += "\tpublic void insert ("+nombreBean+" dato);\n";
-		informacion += "\tpublic void insertSelective ("+nombreBean+" dato);\n";
+		//informacion += "\tpublic void insertSelective ("+nombreBean+" dato);\n";
 		informacion += "\tpublic void update ("+nombreBean+" dato);\n";
 		informacion += "\tpublic void updateSelective ("+nombreBean+" dato);\n";
 		informacion += "\tpublic "+nombreBean+" selectOne("+nombreBean+" dato);\n";
@@ -98,7 +103,7 @@ public class CrearClaseJavav3 {
 	}
 
 	private static void creanDAOImpl(ProyectoBean proy, ClaseBean clase) throws IOException {
-		String prefixfile = proy.getUbicacionProyecto() + proy.getNombreProyecto() + proy.getRutamvn()
+		String prefixfile = proy.getUbicacionProyecto() + proy.getNombreProyecto() + proy.getRutajava()
 				+ proy.getPaqueteria().replace(".", "/") + "/";
 		File directorio = new File(prefixfile+"dao/");
 		directorio.mkdirs();
@@ -112,9 +117,6 @@ public class CrearClaseJavav3 {
 		informacion += ";\n";
 		informacion += "public class " + nombreClase + "DaoImpl extends ConexionDB implements "+nombreClase+"Dao { " + "\n";
 		informacion += "\tpublic void insert ("+nombreBean+" dato){\n";
-		informacion += insertDao(clase);
-		informacion += "\t}\n";
-		informacion += "\tpublic void insertSelective ("+nombreBean+" dato){\n";
 		informacion += insertDao(clase);
 		informacion += "\t}\n";
 		informacion += "\tpublic void update ("+nombreBean+" dato){\n";
@@ -132,7 +134,6 @@ public class CrearClaseJavav3 {
 		informacion += "}";
 		bw.write(informacion);
 		bw.close();
-		//System.out.println("" + clase.getNombre() + ": creada correctamente");
 	}
 	
 	private static String selectOne(ClaseBean clase, String nombreBean) {
@@ -142,11 +143,13 @@ public class CrearClaseJavav3 {
 		funcionalidad += "\t\t\twhile(rs.next()){\n";
 		for (AtributosBean element : clase.getAtributos()) {
 			if(element.isIspk()) {
-				filtro += "\t\t\tsql += \" where "+element.getNombreClase()+" =  ? \";\n";
+				filtro += "\t\t\tsql += \" where "+element.getNombreClase()+clase.getAbreviatura()+" =  ? \";\n";
 				filtro += "\t\t\tpstm = conn.prepareStatement(sql);\n"; 
 				filtro += "\t\t\tpstm.set"+element.getClaseDB()+"(1, dato.get"+element.getNombreClase()+"());\n";
 			}
-			funcionalidad +="\t\t\t\tlistado.set"+element.getNombreClase()+"(rs.get"+element.getClaseDB()+"(\""+element.getNombreClase()+"\"));\n";
+			if(element.isDb()) {
+					funcionalidad +="\t\t\t\tlistado.set"+element.getNombreClase()+"(rs.get"+element.getClaseDB()+"(\""+element.getNombreClase()+clase.getAbreviatura()+"\"));\n";	
+			}
 		}
 		funcionalidad += "\t\t\t}\n";
 		String inicial = "       "+nombreBean+" listado = new "+nombreBean+"();\n" ;
@@ -154,8 +157,9 @@ public class CrearClaseJavav3 {
 	}
 	
 	private static String selectDao(ClaseBean clase, String nombreBean) {
+		String tablas = "";
 		String funcionalidad = "";
-		funcionalidad  += "\t\t\tString sql = \"Select * from "+clase.getNombre()+" \";\n";
+		funcionalidad  += "\t\t\tString sql = \"Select * from "+clase.getNombre()+" <<tablas>> \";\n";
 		funcionalidad += "\t\t\tif(filtro!=null&&!filtro.isEmpty())\n"; 
 		funcionalidad += "\t\t\t\tsql += filtro;\n"; 
 		funcionalidad += "\t\t\tpstm = conn.prepareStatement(sql);\n"; 
@@ -163,8 +167,16 @@ public class CrearClaseJavav3 {
 		funcionalidad += "\t\t\twhile(rs.next()){\n";
 		funcionalidad += "\t\t\t\t"+nombreBean+ " idato = new "+nombreBean+"();\n";
 		for (AtributosBean element : clase.getAtributos()) {
-			funcionalidad +="\t\t\t\tidato.set"+element.getNombreClase()+"(rs.get"+element.getClaseDB()+"(\""+element.getNombreClase()+"\"));\n";
+			if(element.isDb()) {
+				funcionalidad +="\t\t\t\tidato.set"+element.getNombreClase()+"(rs.get"+element.getClaseDB()+"(\""+element.getNombreClase()+clase.getAbreviatura()+"\"));\n";
+			}else {
+				if(!element.getTabla().isEmpty()) {
+					tablas += " left join "+element.getTabla() + " on "+clase.getNombre()+"."+element.getJoin()+clase.getAbreviatura()+" = "+element.getTabla()+"."+element.getJoin()+" ";
+					funcionalidad +="\t\t\t\tidato.set"+element.getNombreClase()+"(rs.get"+element.getClaseDB()+"(\""+element.getAttdb()+"\"));\n";
+				}
+			}
 		}
+		funcionalidad = funcionalidad.replace("<<tablas>>", tablas);
 		funcionalidad += "\t\t\t\tlistado.add(idato);\n";
 		funcionalidad += "\t\t\t}\n";
 		String inicial = "       java.util.ArrayList<"+nombreBean+"> listado = new java.util.ArrayList<"+nombreBean+">();\n" ;
@@ -178,11 +190,15 @@ public class CrearClaseJavav3 {
 		String nombres = "";
 		String indices = "";
 		for (AtributosBean element : clase.getAtributos()) {
-			nombres +=element.getNombre()+",";
-			indices +="?,";
-			funcionalidad += "\t\t\tpstm.set"+element.getClaseDB()+"("+i+", dato.get"+element.getNombreClase()+"());\n";
-			i++;
-			element.getNombre();
+			if(element.isDb()) {
+				nombres +=element.getNombre()+clase.getAbreviatura()+",";
+				indices +="?,";
+				funcionalidad += "\t\t\tpstm.set"+element.getClaseDB()+"("+i+", ";
+				funcionalidad += element.isIspk()?"getSecuencia(\""+element.getNombre()+clase.getAbreviatura()+"\")":"dato.get"+element.getNombreClase()+"()";
+				funcionalidad += ");\n";
+				i++;
+				//element.getNombre();	
+			}
 		}
 		nombres = nombres.substring(0, nombres.length()-1);
 		indices = indices.substring(0, indices.length()-1);
@@ -200,26 +216,28 @@ public class CrearClaseJavav3 {
 		String primarypost = "";
 		for (AtributosBean element : clase.getAtributos()) {
 			if(element.isIspk()) {
-				primary = "\t\t\tsql += \" where  "+element.getNombre()+" = ? \" ; \n";
+				primary = "\t\t\tsql += \" where  "+element.getNombre()+clase.getAbreviatura()+" = ? \" ; \n";
 				primarypost += "\t\t\tpstm.set"+element.getClaseDB()+"(i++, dato.get"+element.getNombreClase()+"());\n";
 			}else {
+				if(element.isDb()) {
+					nombres += "\t\t\tif(";
+					nombres += element.getClase().equalsIgnoreCase("int")?"0":"null";
+					nombres +="!= dato.get"+element.getNombreClase()+"()";
+					if (!element.getAutomatico().isEmpty()) {
+						nombres += " && !dato.get"+element.getNombreClase()+"().isEmpty()";
+					}
+					nombres += ")\n";
+					nombres += "\t\t\t\tsql += \" "+element.getNombre()+clase.getAbreviatura()+" = ? ,\";\n";
+					post += "\t\t\tif(";
+					post += element.getClase().equalsIgnoreCase("int")?"0":"null";
+					post +="!= dato.get"+element.getNombreClase()+"()";
+					if (!element.getAutomatico().isEmpty()) {
+						post += " && !dato.get"+element.getNombreClase()+"().isEmpty()";
+					}
+					post += ")\n";
+					post += "\t\t\t\tpstm.set"+element.getClaseDB()+"(i++, dato.get"+element.getNombreClase()+"());\n";
 				
-				nombres += "\t\t\tif(";
-				nombres += element.getClase().equalsIgnoreCase("int")?"0":"null";
-				nombres +="!= dato.get"+element.getNombreClase()+"()";
-				if (!element.getAutomatico().isEmpty()) {
-					nombres += " && !dato.get"+element.getNombreClase()+"().isEmpty()";
 				}
-				nombres += ")\n";
-				nombres += "\t\t\t\tsql += \" "+element.getNombre()+" = ? ,\";\n";
-				post += "\t\t\tif(";
-				post += element.getClase().equalsIgnoreCase("int")?"0":"null";
-				post +="!= dato.get"+element.getNombreClase()+"()";
-				if (!element.getAutomatico().isEmpty()) {
-					post += " && !dato.get"+element.getNombreClase()+"().isEmpty()";
-				}
-				post += ")\n";
-				post += "\t\t\t\tpstm.set"+element.getClaseDB()+"(i++, dato.get"+element.getNombreClase()+"());\n";
 			}
 		}
 		funcionalidad += nombres;
@@ -296,7 +314,7 @@ public class CrearClaseJavav3 {
 	}
 	
 	private static void crearBean(ProyectoBean proy, ClaseBean clase) throws IOException {
-		String prefixfile = proy.getUbicacionProyecto() + proy.getNombreProyecto() + proy.getRutamvn()
+		String prefixfile = proy.getUbicacionProyecto() + proy.getNombreProyecto() + proy.getRutajava()
 				+ proy.getPaqueteria().replace(".", "/") + "/";
 
 		File directorio = new File(prefixfile+"bean/");
@@ -336,7 +354,7 @@ public class CrearClaseJavav3 {
 	}
 	
 	private static void crearServlet(ProyectoBean proy, ClaseBean clase) throws IOException {
-		String prefixfile = proy.getUbicacionProyecto() + proy.getNombreProyecto() + proy.getRutamvn()
+		String prefixfile = proy.getUbicacionProyecto() + proy.getNombreProyecto() + proy.getRutajava()
 				+ proy.getPaqueteria().replace(".", "/") + "/";
 		String paqueteria = proy.getPaqueteria();
 		File directorio = new File(prefixfile+"servlet/");
@@ -384,11 +402,11 @@ public class CrearClaseJavav3 {
 				"					filtro = \" where <<nfiltro>> like ('%\"+lbBusqueda+\"%')\";\r\n" + 
 				"				}\r\n" + 
 				"				filtro += \" order by <<nfiltro>> asc\";\n";
-		informacion = informacion.replace("<<nfiltro>>", clase.getFiltro());
+		informacion = informacion.replace("<<nfiltro>>", clase.getFiltro()+clase.getAbreviatura());
 		informacion += "				ArrayList<"+nombreBean+"> lista = dao.select(filtro);\n";
 		informacion += "				String base = \"<tr>";
 		for (AtributosBean element : clase.getAtributos()) {
-			if(!element.isIsform()) {
+			if(element.isIsform()) {
 				informacion += "<td>%s</td>";	
 			}
 		}
@@ -405,14 +423,13 @@ public class CrearClaseJavav3 {
 		String id = "";
 		AtributosBean elementId = null;
 		for (AtributosBean element : clase.getAtributos()) {
-			if(!element.isIsform()) {
-				if(element.isIspk()) {
-					id = "idato.get"+element.getNombreClase()+"()";
-					elementId = element;
-				}
+			if(element.isIspk()) {
+				id = "idato.get"+element.getNombreClase()+"()";
+				elementId = element;
+			}
+			if(element.isIsform()) {
 				informacion += "idato.get"+element.getNombreClase()+"(),";
 			}
-			
 		}
 		informacion +=id+","+id;
 		informacion += ");\r\n" + 
@@ -427,7 +444,7 @@ public class CrearClaseJavav3 {
 				informacion +="\t\t\t\t"+paqueteria+".dao."+clase.getNombre()+"Dao dao = new "+paqueteria+".dao."+clase.getNombre()+"DaoImpl();\n";
 				informacion +="				String filtro = \"\";\n";
 				informacion +="				filtro += \" order by <<nfiltro>> asc\";\n";
-				informacion = informacion.replace("<<nfiltro>>", clase.getFiltro());
+				informacion = informacion.replace("<<nfiltro>>", clase.getFiltro()+clase.getAbreviatura());
 				informacion += "				ArrayList<"+nombreBean+"> lista = dao.select(filtro);\n";
 				informacion += "				String base = \"<option value='%s'>%s</option>\" ;\n";
 				informacion += "				if (lista != null && !lista.isEmpty()) {\r\n" + 
@@ -446,7 +463,8 @@ public class CrearClaseJavav3 {
 		informacion +="\t\t\t\t"+paqueteria+".dao."+clase.getNombre()+"Dao dao = new "+paqueteria+".dao."+clase.getNombre()+"DaoImpl();\n";
 		//
 		for (AtributosBean element : clase.getAtributos()) {
-			informacion += "\t\t\t\tdato.set"+element.getNombreClase()+"("+element.getClasePRIn()+"request.getParameter(\""+element.getNombre()+"\")"+element.getClasePROut()+");\n";
+			if(!element.isIspk())
+				informacion += "\t\t\t\tdato.set"+element.getNombreClase()+"("+element.getClasePRIn()+"request.getParameter(\""+element.getNombre()+"\")"+element.getClasePROut()+");\n";
 		}
 		informacion +="				dao.insert(dato);\r\n" + 
 				"				res.setDescripcion(\"Nuevo elemento\");\n";
@@ -496,7 +514,7 @@ public class CrearClaseJavav3 {
 	
 	
 	private static void crearHtml(ProyectoBean proy, ClaseBean clase) throws IOException {
-		String prefixfile = proy.getUbicacionProyecto() + proy.getNombreProyecto() + proy.getRutamvnw()
+		String prefixfile = proy.getUbicacionProyecto() + proy.getNombreProyecto() + proy.getRutaweb()
 				+ "/";
 		File directorio = new File(prefixfile);
 		directorio.mkdirs();
@@ -584,7 +602,7 @@ public class CrearClaseJavav3 {
 				"							<thead>\r\n" + 
 				"								<tr>\r\n";
 		for (AtributosBean element : clase.getAtributos()) {
-			if(!element.isIsform()) {
+			if(element.isIsform()) {
 				informacion += "									<th scope=\"col\">"+element.getNombreClase()+"</th>\r\n";	
 			}
 		}
@@ -609,41 +627,51 @@ public class CrearClaseJavav3 {
 				"			</div>\r\n" + 
 				"			<!-- formulario de edicion -->\r\n" + 
 				"			<div>\r\n" + 
-				"				<div id=\"datos\">\r\n" + 
+				"				<div id=\"datos\">\r\n					<form method=\"post\" id=\"formEnviar\">\r\n" + 
 				"					<input type=\"hidden\" class=\"form-control\" id=\"accion\" value=\"\" />\r\n";
 		AtributosBean pka = null;
 		for (AtributosBean element : clase.getAtributos()) {
 			if(element.isIspk())
 				pka = element;
-			informacion += 
-					"					<div class=\"form-group row\">\r\n" + 
-					"						<label for=\"Id"+element.getNombreClase()+"\" class=\"col-sm-2 col-form-label\">"+element.getNombreClase()+"</label>\r\n" + 
-					"						<div class=\"col-sm-10\">\r\n" ;
-			if("select".equalsIgnoreCase(element.getElemento())) {
-				informacion +=
-						"							<select class=\"form-control\" id=\"Id"+element.getNombreClase()+"\"></select>\r\n";
-			}else {
-				informacion +=
-						"							<input type=\"text\" class=\"form-control\" id=\"Id"+element.getNombreClase()+"\"\r\n" + 
-						"								placeholder=\""+element.getNombreClase()+"\" value=\"\" />\r\n";
+			if(element.isDb()) {
+				informacion += 
+						"					<div class=\"form-group row\">\r\n" + 
+						"						<label for=\"Id"+element.getNombreClase()+"\" class=\"col-sm-2 col-form-label\">"+element.getNombreClase()+"</label>\r\n" + 
+						"						<div class=\"col-sm-10\">\r\n" ;
+				if("select".equalsIgnoreCase(element.getElemento())) {
+					informacion +=
+							"							<select class=\"form-control\" id=\"Id"+element.getNombreClase()+"\" "+element.getRequired()+"></select>\r\n";
+				}else {
+					informacion +=
+							"							<input type=\"text\" class=\"form-control\" id=\"Id"+element.getNombreClase()+"\"\r\n" + 
+							"								placeholder=\""+element.getNombreClase()+"\" value=\"\" ";
+					if(element.isIspk()) {
+						informacion += " disabled ";	
+					}else {
+						informacion += " "+element.getRequired()+" ";
+						informacion += "maxlength=\""+element.getMaxlength()+"\" ";
+					}
+					
+					informacion +=		" />\r\n";				
+				}
+				informacion += 
+						"						</div>\r\n" + 
+						"					</div>\r\n" ;
 			}
 			
-			informacion += 
-					"						</div>\r\n" + 
-					"					</div>\r\n" ;
 		}
 		informacion +=
 				"					<div class=\"form-group row\">\r\n" + 
 				"						<div class=\"col-sm-6\">\r\n" + 
-				"							<input type=\"button\" class=\"btn\" id=\"btnEnviar\"\r\n" + 
-				"								onClick=\"return Clickbtn_Enviar();\" value=\"Enviar\">\r\n" + 
+				"							<input type=\"submit\" class=\"btn\" id=\"btnEnviar\"\r\n" + 
+				"								 value=\"Enviar\">\r\n" + 
 				"						</div>\r\n" + 
 				"						<div class=\"col-sm-6\">\r\n" + 
 				"							<input type=\"button\" class=\"btn\" id=\"btnRegresar\"\r\n" + 
 				"								onClick=\"return Clickbtn_Regresar();\" value=\"Regresar\">\r\n" + 
 				"						</div>\r\n" + 
 				"					</div>\r\n" + 
-				"				</div>\r\n" + 
+				"				</form></div>\r\n" + 
 				"			</div>\r\n" + 
 				"		</div>\r\n" + 
 				"		<div class=\"row\">\r\n" + 
@@ -846,6 +874,10 @@ public class CrearClaseJavav3 {
 				"			$('#formBusqueda').submit(function(event) {\r\n" + 
 				"				buscar();\r\n" + 
 				"				event.preventDefault();\r\n" + 
+				"			});\r\n" + 
+				"			$('#formEnviar').submit(function(event) {\r\n" + 
+				"				Clickbtn_Enviar();\r\n" + 
+				"				event.preventDefault();\r\n" + 
 				"			});\r\n" ;
 			for (AtributosBean element : clase.getAtributos()) {
 				if("select".equalsIgnoreCase(element.getElemento())) {
@@ -895,7 +927,6 @@ public class CrearClaseJavav3 {
 				stringBuilder.append(line);
 				stringBuilder.append(ls);
 			}
-
 			return stringBuilder.toString();
 		} finally {
 			reader.close();

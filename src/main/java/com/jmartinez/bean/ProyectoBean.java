@@ -6,9 +6,9 @@ import java.util.List;
 public class ProyectoBean {
 	private String nombreProyecto;
 	private String ubicacionProyecto;
-	private String rutamvn ;
-	private String rutamvnw;
-	private String rutamvnf;
+	private String rutajava ;
+	private String rutaweb;
+	private String rutafile;
 	private String paqueteria ;
 	private List<ClaseBean> clases;
 	public String getNombreProyecto() {
@@ -32,28 +32,30 @@ public class ProyectoBean {
 	public void setUbicacionProyecto(String ubicacionProyecto) {
 		this.ubicacionProyecto = ubicacionProyecto;
 	}
-	public String getRutamvn() {
-		return rutamvn;
-	}
-	public void setRutamvn(String rutamvn) {
-		this.rutamvn = rutamvn;
-	}
+	
 	public String getPaqueteria() {
 		return paqueteria;
 	}
 	public void setPaqueteria(String paqueteria) {
 		this.paqueteria = paqueteria;
 	}
-	public String getRutamvnw() {
-		return rutamvnw;
+	public String getRutajava() {
+		return rutajava;
 	}
-	public void setRutamvnw(String rutamvnw) {
-		this.rutamvnw = rutamvnw;
+	public void setRutajava(String rutajava) {
+		this.rutajava = rutajava;
 	}
-	public String getRutamvnf() {
-		return rutamvnf;
+
+	public String getRutafile() {
+		return rutafile;
 	}
-	public void setRutamvnf(String rutamvnf) {
-		this.rutamvnf = rutamvnf;
+	public void setRutafile(String rutafile) {
+		this.rutafile = rutafile;
+	}
+	public String getRutaweb() {
+		return rutaweb;
+	}
+	public void setRutaweb(String rutaweb) {
+		this.rutaweb = rutaweb;
 	}
 }

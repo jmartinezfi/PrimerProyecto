@@ -1,9 +1,9 @@
 {
 	"nombreProyecto": "webexample01",
 	"ubicacionProyecto": "I:\\proyectos\\java\\gitProyects/",
-	"rutamvn": "/src/main/java/",
-	"rutamvnw": "/src/main/webapp/",
-	"rutamvnf": "/src/main/resources/",
+	"rutajava": "/src/main/java/",
+	"rutaweb": "/src/main/webapp/",
+	"rutafile": "/src/main/resources/",
 	"paqueteria": "com.martinez.proyectoVentas",
 	"clases": [
 		{
@@ -34,17 +34,20 @@
 			"atributos": [
 				{
 					"clase": "int",
-					"nombre": "codCategoria",
+					"nombre": "codigo",
 					"ispk": true
 				},
 				{
 					"clase": "String",
 					"nombre": "nombre",
-					"automatico": "\"\""
+					"automatico": "\"\"",
+					"required": "required",
+					"maxlength" : "100"
 				},
 				{
 					"clase": "String",
-					"nombre": "descripcion"
+					"nombre": "descripcion",
+					"maxlength" : "200"
 				},
 				{
 					"clase": "String",
@@ -53,7 +56,7 @@
 				{
 					"clase": "String",
 					"nombre": "estado",
-					"isform": true
+					"isform": false
 				}
 			]
 		},
@@ -63,28 +66,24 @@
 			"atributos": [
 				{
 					"clase": "int",
-					"nombre": "codMarca",
-					"ispk": true,
-					"elemento": "input",
-					"type": "hidden"
+					"nombre": "codigo",
+					"ispk": true
 				},
 				{
 					"clase": "String",
 					"nombre": "nombre",
 					"automatico": "\"\"",
-					"elemento": "input",
-					"type": "text"
+					"required": "required"
 				},
 				{
 					"clase": "String",
-					"nombre": "apellido",
-					"elemento": "input"
+					"nombre": "apellido"
 				},
 				{
 					"clase": "String",
 					"nombre": "estado",
 					"automatico": "\"\"",
-					"isform": true
+					"isform": false
 				}
 			]
 		},
@@ -94,41 +93,56 @@
 			"atributos": [
 				{
 					"clase": "int",
-					"nombre": "codProducto",
-					"ispk": true,
-					"elemento": "input",
-					"type": "hidden"
+					"nombre": "codigo",
+					"ispk": true
 				},
 				{
 					"clase": "String",
 					"nombre": "nombre",
-					"automatico": "\"\"",
-					"elemento": "input",
-					"type": "text"
+					"required": "required"
 				},
 				{
 					"clase": "String",
-					"nombre": "descripcion",
-					"elemento": "input",
-					"type": "text"
+					"automatico": "\"\"",
+					"nombre": "descripcion"
 				},
 				{
 					"clase": "int",
-					"nombre": "codMarca",
+					"nombre": "codigoMarc",
+					"required": "required",
 					"elemento": "select", 
-					"servlet" :"Marca"
+					"servlet" :"Marca",
+					"isform": false
 				},
 				{
 					"clase": "int",
-					"nombre": "codCategoria",
+					"nombre": "codigoCate",
+					"required": "required",
 					"elemento": "select",
-					"servlet" :"Categoria"
+					"servlet" :"Categoria",
+					"isform": false
+				},
+				{
+					"clase": "String",
+					"nombre": "Marca",
+					"attdb" : "nombreMarc",
+					"join" : "codigoMarc",
+					"tabla" : "Marca",
+					"db" : false
+				},
+				{
+					"clase": "String",
+					"nombre": "Categoria",
+					"tabla" : "Categoria",
+					"join" : "codigoCate",
+					"attdb" : "nombreCate",
+					"db" : false
 				},
 				{
 					"clase": "String",
 					"nombre": "estado",
 					"automatico": "\"\"",
-					"isform": true
+					"isform": false
 				}
 			]
 		}

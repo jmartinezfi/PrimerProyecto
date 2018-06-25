@@ -9,7 +9,10 @@ public class ClaseBean {
 	private String nombre;
 	private boolean oBean;
 	//nombre del atributo para los filtros
-	private String filtro; 
+	private String filtro = "Nombre"; 
+	
+	private String abreviatura = "";
+	
 	private List<AtributosBean> atributos = new ArrayList<>();
 	public String getPaqueteria() {
 		return paqueteria;
@@ -40,6 +43,15 @@ public class ClaseBean {
 	}
 	public void setFiltro(String filtro) {
 		this.filtro = filtro;
+	}
+	public String getAbreviatura() {
+		if(abreviatura.isEmpty()) {
+			return nombre.substring(0, 4);
+		}
+		return abreviatura;
+	}
+	public void setAbreviatura(String abreviatura) {
+		this.abreviatura = abreviatura;
 	}
 	
 	

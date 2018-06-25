@@ -21,14 +21,32 @@ public class AtributosBean {
 	private boolean verActualizar;
 	
 	//Indicar si se muestra en el formulario
-	private boolean isform; 
+	private boolean isform = true; 
 	//indica el elemento en el formulario
 	private String elemento;
 	//tipo de elemento
 	private String type;
-	
+	//cuando es un combo
 	private String servlet;
 	
+	//para verificar si es requerido
+	private String required = "";
+	//maxlength
+	private String maxlength="100"; 
+	//para verificar que va a base de datos
+	private boolean db = true;
+	//Tabla externa de utilizarse
+	private String tabla = "";
+	private String join = "" ;
+	private String attdb = "";
+	
+	
+	public String getMaxlength() {
+		return maxlength;
+	}
+	public void setMaxlength(String maxlength) {
+		this.maxlength = maxlength;
+	}
 	public String getClase() {
 		return clase;
 	}
@@ -95,13 +113,16 @@ public class AtributosBean {
 			return "int(11)";
 		}
 		if("String".equalsIgnoreCase(getClase())) {
-			return "varchar(100)";
+			return "varchar("+maxlength+")";
 		}
 		return claseDB;
 	}
 	public String getClaseDB() {
 		if("int".equalsIgnoreCase(getClase())) {
 			return "Int";
+		}
+		if("double".equalsIgnoreCase(getClase())) {
+			return "Double";
 		}
 		if("String".equalsIgnoreCase(getClase())) {
 			return "String";
@@ -112,10 +133,13 @@ public class AtributosBean {
 		if("int".equalsIgnoreCase(getClase())) {
 			return "Integer.parseInt(";
 		}
+		if("double".equalsIgnoreCase(getClase())) {
+			return "Double.parseDouble(";
+		}
 		return "";
 	}
 	public String getClasePROut() {
-		if("int".equalsIgnoreCase(getClase())) {
+		if("int".equalsIgnoreCase(getClase())||"double".equalsIgnoreCase(getClase())) {
 			return ")";
 		}
 		return "";
@@ -153,6 +177,35 @@ public class AtributosBean {
 	public void setServlet(String servlet) {
 		this.servlet = servlet;
 	}
-	
+	public String getRequired() {
+		return required;
+	}
+	public void setRequired(String required) {
+		this.required = required;
+	}
+	public boolean isDb() {
+		return db;
+	}
+	public void setDb(boolean db) {
+		this.db = db;
+	}
+	public String getTabla() {
+		return tabla;
+	}
+	public void setTabla(String tabla) {
+		this.tabla = tabla;
+	}
+	public String getJoin() {
+		return join;
+	}
+	public void setJoin(String join) {
+		this.join = join;
+	}
+	public String getAttdb() {
+		return attdb;
+	}
+	public void setAttdb(String attdb) {
+		this.attdb = attdb;
+	}
 	
 }
