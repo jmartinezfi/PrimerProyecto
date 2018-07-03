@@ -84,16 +84,16 @@ public class CrearClaseJavav2 {
 					informacion += " = "+atributo.getAutomatico();
 				}
 				informacion +="; \n";
-				if(atributo.isIsget()) {
+				//if(atributo.isIsget()) {
 					informacion +="\t"+"public "+atributo.getClase()+" get"+atributo.getNombreClase()+" { "+"\n";
 					informacion += "\t"+"\t"+"return "+atributo.getNombre()+ ";"+"\n";
 					informacion += "\t"+"}"+"\n";
-				}
-				if(atributo.isIsset()) {
+				//}
+				//if(atributo.isIsset()) {
 					informacion +="\t"+"public "+atributo.getClase()+" set"+atributo.getNombreClase()+"("+atributo.getClase()+" "+atributo.getNombre()+") { "+"\n";
 					informacion += "\t"+"\t"+"this."+atributo.getNombre()+" = "+atributo.getNombre()+";"+"\n";
 					informacion += "\t"+"}"+"\n";
-				}
+				//}
 			}
 			informacion += "\n";
 			informacion += "}";

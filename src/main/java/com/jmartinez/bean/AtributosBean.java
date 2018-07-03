@@ -8,17 +8,17 @@ public class AtributosBean {
 	//Nombre de atributo
 	private String nombre;
 	
-	private boolean isset = true;
-	private boolean isget = true;
+	//private boolean isset = true;
+	//private boolean isget = true;
 	private boolean ispk = false;
 	//Asignación de valor por defecto
 	private String automatico;
 	//Para mostrar en la grilla de listado
-	private boolean verSelect;
+	//private boolean verSelect;
 	//Para mostrar en la grilla de Nuevo
-	private boolean verNuevo;
+	//private boolean verNuevo;
 	//Para mostrar en la grilla de actualizacion
-	private boolean verActualizar;
+	//private boolean verActualizar;
 	
 	//Indicar si se muestra en el formulario
 	private boolean isform = true; 
@@ -48,6 +48,9 @@ public class AtributosBean {
 		this.maxlength = maxlength;
 	}
 	public String getClase() {
+		if("timestamp".equals(clase)) {
+			return "String";
+		}
 		return clase;
 	}
 	public void setClase(String clase) {
@@ -69,7 +72,7 @@ public class AtributosBean {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public boolean isIsset() {
+	/**public boolean isIsset() {
 		return isset;
 	}
 	public void setIsset(boolean isset) {
@@ -80,7 +83,7 @@ public class AtributosBean {
 	}
 	public void setIsget(boolean isget) {
 		this.isget = isget;
-	}
+	}*/
 	public String getAutomatico() {
 		if(automatico==null) {
 			return "";
@@ -90,7 +93,7 @@ public class AtributosBean {
 	public void setAutomatico(String automatico) {
 		this.automatico = automatico;
 	}
-	public boolean isVerSelect() {
+	/**public boolean isVerSelect() {
 		return verSelect;
 	}
 	public void setVerSelect(boolean verSelect) {
@@ -107,7 +110,7 @@ public class AtributosBean {
 	}
 	public void setVerActualizar(boolean verActualizar) {
 		this.verActualizar = verActualizar;
-	}
+	}*/
 	public String getClaseSQL() {
 		if("int".equalsIgnoreCase(getClase())) {
 			return "int(11)";
@@ -120,14 +123,14 @@ public class AtributosBean {
 	public String getClaseDB() {
 		if("int".equalsIgnoreCase(getClase())) {
 			return "Int";
-		}
-		if("double".equalsIgnoreCase(getClase())) {
+		}else if("double".equalsIgnoreCase(getClase())) {
 			return "Double";
-		}
-		if("String".equalsIgnoreCase(getClase())) {
+		}else if("String".equalsIgnoreCase(getClase())) {
 			return "String";
+		}else if("float".equalsIgnoreCase(getClase())) {
+			return "Float";
 		}
-		return claseDB;
+		return clase;
 	}
 	public String getClasePRIn() {
 		if("int".equalsIgnoreCase(getClase())) {
@@ -136,10 +139,13 @@ public class AtributosBean {
 		if("double".equalsIgnoreCase(getClase())) {
 			return "Double.parseDouble(";
 		}
+		if("float".equalsIgnoreCase(getClase())) {
+			return "Float.parseFloat(";
+		}
 		return "";
 	}
 	public String getClasePROut() {
-		if("int".equalsIgnoreCase(getClase())||"double".equalsIgnoreCase(getClase())) {
+		if("int".equalsIgnoreCase(getClase())||"double".equalsIgnoreCase(getClase())||"float".equalsIgnoreCase(getClase())) {
 			return ")";
 		}
 		return "";

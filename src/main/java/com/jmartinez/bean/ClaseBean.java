@@ -39,14 +39,20 @@ public class ClaseBean {
 		this.oBean = oBean;
 	}
 	public String getFiltro() {
-		return filtro;
+		//return filtro;
+		if(filtro==null) {
+			return "";
+		}else {
+			String temp = filtro.substring(0, 1).toUpperCase()+filtro.substring(1);
+			return temp;
+		}
 	}
 	public void setFiltro(String filtro) {
 		this.filtro = filtro;
 	}
 	public String getAbreviatura() {
 		if(abreviatura.isEmpty()) {
-			return nombre.substring(0, 4);
+			//return nombre.substring(0, 4);
 		}
 		return abreviatura;
 	}

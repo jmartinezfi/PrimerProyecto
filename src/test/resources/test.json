@@ -9,7 +9,7 @@
 		{
 			"nombre": "cosmeticos_compra",
 			"oBean": false,
-			"filtro": "Nombre",
+			"filtro": "id_coscompra",
 			"atributos": [
 				{
 					"clase": "int",
@@ -150,7 +150,7 @@
 		{
 			"nombre": "cosmeticos_compra_det",
 			"oBean": false,
-			"filtro": "Nombre",
+			"filtro": "id_comdetalle",
 			"atributos": [
 				{
 					"clase": "int",
@@ -277,7 +277,7 @@
 		{
 			"nombre": "cosmeticos_movimientos",
 			"oBean": false,
-			"filtro": "Nombre",
+			"filtro": "id_costmovimientos",
 			"atributos": [
 				{
 					"clase": "int",
@@ -357,7 +357,7 @@
 		{
 			"nombre": "cosmeticos_pedido",
 			"oBean": false,
-			"filtro": "Nombre",
+			"filtro": "id_cospedido",
 			"atributos": [
 				{
 					"clase": "int",
@@ -498,7 +498,7 @@
 		{
 			"nombre": "cosmeticos_pedido_det",
 			"oBean": false,
-			"filtro": "Nombre",
+			"filtro": "id_peddetalle",
 			"atributos": [
 				{
 					"clase": "int",
@@ -632,7 +632,7 @@
 		{
 			"nombre": "cosmeticos_producto",
 			"oBean": false,
-			"filtro": "Nombre",
+			"filtro": "id_cosproducto",
 			"atributos": [
 				{
 					"clase": "int",
@@ -732,7 +732,7 @@
 		{
 			"nombre": "cosmeticos_venta",
 			"oBean": false,
-			"filtro": "Nombre",
+			"filtro": "id_cosventa",
 			"atributos": [
 				{
 					"clase": "int",
@@ -873,7 +873,7 @@
 		{
 			"nombre": "cosmeticos_venta_det",
 			"oBean": false,
-			"filtro": "Nombre",
+			"filtro": "id_vendetalle",
 			"atributos": [
 				{
 					"clase": "int",
@@ -1007,7 +1007,7 @@
 		{
 			"nombre": "sistema_cliente",
 			"oBean": false,
-			"filtro": "id_cliente",
+			"filtro": "Nombre",
 			"atributos": [
 				{
 					"clase": "int",
@@ -1132,7 +1132,7 @@
 		{
 			"nombre": "sistema_comprador",
 			"oBean": false,
-			"filtro": "id_comprador",
+			"filtro": "Nombre",
 			"atributos": [
 				{
 					"clase": "int",
@@ -1201,7 +1201,7 @@
 		{
 			"nombre": "sistema_listas",
 			"oBean": false,
-			"filtro": "Nombre",
+			"filtro": "NORDEN",
 			"atributos": [
 				{
 					"clase": "String",
@@ -1258,7 +1258,7 @@
 		{
 			"nombre": "sistema_nombre",
 			"oBean": false,
-			"filtro": "id_sistema",
+			"filtro": "Nombre",
 			"atributos": [
 				{
 					"clase": "int",
@@ -1297,7 +1297,7 @@
 		{
 			"nombre": "sistema_proveedor",
 			"oBean": false,
-			"filtro": "id_proveedor",
+			"filtro": "Nombre",
 			"atributos": [
 				{
 					"clase": "int",
@@ -1366,7 +1366,7 @@
 		{
 			"nombre": "sistema_secuencias",
 			"oBean": false,
-			"filtro": "Nombre",
+			"filtro": "ID_SECUENCIA",
 			"atributos": [
 				{
 					"clase": "int",

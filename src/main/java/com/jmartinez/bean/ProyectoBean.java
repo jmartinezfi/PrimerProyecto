@@ -6,11 +6,11 @@ import java.util.List;
 public class ProyectoBean {
 	private String nombreProyecto;
 	private String ubicacionProyecto;
-	private String rutajava ;
-	private String rutaweb;
-	private String rutafile;
+	private String rutajava = "/src/main/java/" ;
+	private String rutaweb = "/src/main/webapp/";
+	private String rutafile = "/src/main/resources/";
 	private String paqueteria ;
-	private List<ClaseBean> clases;
+	private List<ClaseBean> clases = new ArrayList<>();
 	public String getNombreProyecto() {
 		return nombreProyecto;
 	}

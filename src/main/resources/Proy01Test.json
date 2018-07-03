@@ -1,148 +1,1404 @@
 {
-	"nombreProyecto": "webexample02",
+	"nombreProyecto": "webexample01",
 	"ubicacionProyecto": "I:\\proyectos\\java\\gitProyects/",
 	"rutajava": "/src/main/java/",
 	"rutaweb": "/src/main/webapp/",
 	"rutafile": "/src/main/resources/",
-	"paqueteria": "com.martinez.proyectoVentas",
+	"paqueteria": "com.martinez.natura",
 	"clases": [
 		{
-			"nombre": "Resultado",
-			"oBean": true,
-			"atributos": [
-				{
-					"clase": "String",
-					"nombre": "codigo"
-				},
-				{
-					"clase": "String",
-					"nombre": "descripcion"
-				},
-				{
-					"clase": "Object",
-					"nombre": "valor"
-				},
-				{
-					"clase": "String",
-					"nombre": "html"
-				}
-			]
-		},
-		{
-			"nombre": "Categoria",
+			"nombre": "cosmeticos_compra",
+			"oBean": false,
 			"filtro": "Nombre",
 			"atributos": [
 				{
 					"clase": "int",
-					"nombre": "codigo",
-					"ispk": true
+					"nombre": "id_coscompra",
+					"ispk": true,
+					"isform": true,
+					"required": "required",
+					"db": true
 				},
 				{
 					"clase": "String",
-					"nombre": "nombre",
-					"automatico": "\"\"",
+					"nombre": "idSunat",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "codProveedor",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "codComprador",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "Double",
+					"nombre": "total",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "tipo_comprobante",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "20",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "ciclo",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "20",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "puntos",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "20",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "numPedido",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "20",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nombreSunat",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "100",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "fechaSunat",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "20",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "desPrecio",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "5000",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "digestValue",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "200",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "moneda",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "10",
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "estado",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "usuarioRegistro",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "timestamp",
+					"nombre": "fechaRegistro",
+					"ispk": false,
+					"isform": true,
 					"required": "required",
-					"maxlength" : "100"
+					"db": true
+				}
+			]
+		},
+		{
+			"nombre": "cosmeticos_compra_det",
+			"oBean": false,
+			"filtro": "Nombre",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "id_comdetalle",
+					"ispk": true,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "id_compra",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "item",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "4",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "codigoProdPro",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "float",
+					"nombre": "cantidad",
+					"ispk": false,
+					"isform": true,
+					"db": true
 				},
 				{
 					"clase": "String",
 					"nombre": "descripcion",
-					"maxlength" : "200"
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
+				},
+				{
+					"clase": "Double",
+					"nombre": "precio1",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "Double",
+					"nombre": "precio2",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "Double",
+					"nombre": "precio3",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "Double",
+					"nombre": "precio4",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "Double",
+					"nombre": "precio5",
+					"ispk": false,
+					"isform": true,
+					"db": true
 				},
 				{
 					"clase": "String",
-					"nombre": "detalle"
+					"nombre": "adicionales",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
 				},
 				{
 					"clase": "String",
+					"nombre": "observacion",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "lote",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "itemDetalle",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "5000",
+					"db": true
+				},
+				{
+					"clase": "int",
 					"nombre": "estado",
-					"isform": false
+					"ispk": false,
+					"isform": true,
+					"db": true
 				}
 			]
 		},
 		{
-			"nombre": "Marca",
+			"nombre": "cosmeticos_movimientos",
+			"oBean": false,
 			"filtro": "Nombre",
 			"atributos": [
 				{
 					"clase": "int",
-					"nombre": "codigo",
-					"ispk": true
+					"nombre": "id_costmovimientos",
+					"ispk": true,
+					"isform": true,
+					"required": "required",
+					"db": true
 				},
 				{
-					"clase": "String",
-					"nombre": "nombre",
-					"automatico": "\"\"",
-					"required": "required"
+					"clase": "int",
+					"nombre": "id_cosproducto",
+					"ispk": false,
+					"isform": true,
+					"db": true
 				},
 				{
-					"clase": "String",
-					"nombre": "apellido"
+					"clase": "float",
+					"nombre": "stock_actual",
+					"ispk": false,
+					"isform": true,
+					"db": true
 				},
 				{
-					"clase": "String",
+					"clase": "float",
+					"nombre": "stock_anterior",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "float",
+					"nombre": "cantidad",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "id_comdetalle",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "id_vendetalle",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "int",
 					"nombre": "estado",
-					"automatico": "\"\"",
-					"isform": false
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "usuarioRegistro",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "timestamp",
+					"nombre": "fechaRegistro",
+					"ispk": false,
+					"isform": true,
+					"required": "required",
+					"db": true
 				}
 			]
 		},
 		{
-			"nombre": "Producto",
+			"nombre": "cosmeticos_pedido",
+			"oBean": false,
 			"filtro": "Nombre",
 			"atributos": [
 				{
 					"clase": "int",
-					"nombre": "codigo",
-					"ispk": true
+					"nombre": "id_cospedido",
+					"ispk": true,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "idSunat",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "codCliente",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nComprador",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
+				},
+				{
+					"clase": "Double",
+					"nombre": "total",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "tipo_comprobante",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "20",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "ciclo",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "20",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "puntos",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "20",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "numPedido",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "20",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nombreSunat",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "100",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "fechaSunat",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "20",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "desPrecio",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "5000",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "digestValue",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "200",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "moneda",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "10",
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "estado",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "usuarioRegistro",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "timestamp",
+					"nombre": "fechaRegistro",
+					"ispk": false,
+					"isform": true,
+					"required": "required",
+					"db": true
+				}
+			]
+		},
+		{
+			"nombre": "cosmeticos_pedido_det",
+			"oBean": false,
+			"filtro": "Nombre",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "id_peddetalle",
+					"ispk": true,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "id_pedido",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "item",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "codigoProdPro",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "codProveedor",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "float",
+					"nombre": "cantidad",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "descripcion",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
+				},
+				{
+					"clase": "Double",
+					"nombre": "precio1",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "Double",
+					"nombre": "precio2",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "Double",
+					"nombre": "precio3",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "Double",
+					"nombre": "precio4",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "Double",
+					"nombre": "precio5",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "adicionales",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "observacion",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "lote",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "itemDetalle",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "5000",
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "estado",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				}
+			]
+		},
+		{
+			"nombre": "cosmeticos_producto",
+			"oBean": false,
+			"filtro": "Nombre",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "id_cosproducto",
+					"ispk": true,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "codigoProdPro",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "codProveedor",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "codComprador",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "descripcion",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "100",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "pro_imagen",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "link",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "estado",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "float",
+					"nombre": "cantidadActual",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "float",
+					"nombre": "precioVenta",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "id_categoria",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "10",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "id_marca",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "10",
+					"db": true
+				}
+			]
+		},
+		{
+			"nombre": "cosmeticos_venta",
+			"oBean": false,
+			"filtro": "Nombre",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "id_cosventa",
+					"ispk": true,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "idSunat",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "codCliente",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nComprador",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
+				},
+				{
+					"clase": "Double",
+					"nombre": "total",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "tipo_comprobante",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "20",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "ciclo",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "20",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "puntos",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "20",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "numPedido",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "20",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nombreSunat",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "100",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "fechaSunat",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "20",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "desPrecio",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "5000",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "digestValue",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "200",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "moneda",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "10",
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "estado",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "usuarioRegistro",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "timestamp",
+					"nombre": "fechaRegistro",
+					"ispk": false,
+					"isform": true,
+					"required": "required",
+					"db": true
+				}
+			]
+		},
+		{
+			"nombre": "cosmeticos_venta_det",
+			"oBean": false,
+			"filtro": "Nombre",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "id_vendetalle",
+					"ispk": true,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "id_venta",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "item",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "codigoProdPro",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "codProveedor",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "float",
+					"nombre": "cantidad",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "descripcion",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
+				},
+				{
+					"clase": "Double",
+					"nombre": "precio1",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "Double",
+					"nombre": "precio2",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "Double",
+					"nombre": "precio3",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "Double",
+					"nombre": "precio4",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "Double",
+					"nombre": "precio5",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "adicionales",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "observacion",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "lote",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "itemDetalle",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "5000",
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "estado",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				}
+			]
+		},
+		{
+			"nombre": "sistema_cliente",
+			"oBean": false,
+			"filtro": "id_cliente",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "id_cliente",
+					"ispk": true,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "codCliente",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "ncompleto",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "1000",
+					"db": true
 				},
 				{
 					"clase": "String",
 					"nombre": "nombre",
-					"required": "required"
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
 				},
 				{
 					"clase": "String",
-					"automatico": "\"\"",
-					"nombre": "descripcion"
+					"nombre": "apePaterno",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "250",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "apeMaterno",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "250",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "direccion",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "fono",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "200",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "correo",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "200",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "coordenadas",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "200",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "accountId",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "legalEntity",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "detalles",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
 				},
 				{
 					"clase": "int",
-					"nombre": "codigoMarc",
-					"required": "required",
-					"elemento": "select", 
-					"servlet" :"Marca",
-					"isform": false
-				},
-				{
-					"clase": "int",
-					"nombre": "codigoCate",
-					"required": "required",
-					"elemento": "select",
-					"servlet" :"Categoria",
-					"isform": false
-				},
-				{
-					"clase": "String",
-					"nombre": "Marca",
-					"attdb" : "nombreMarc",
-					"join" : "codigoMarc",
-					"tabla" : "Marca",
-					"db" : false
-				},
-				{
-					"clase": "String",
-					"nombre": "Categoria",
-					"tabla" : "Categoria",
-					"join" : "codigoCate",
-					"attdb" : "nombreCate",
-					"db" : false
-				},
-				{
-					"clase": "String",
 					"nombre": "estado",
-					"automatico": "\"\"",
-					"isform": false
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "id_sistema",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				}
+			]
+		},
+		{
+			"nombre": "sistema_comprador",
+			"oBean": false,
+			"filtro": "id_comprador",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "id_comprador",
+					"ispk": true,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "codComprador",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nombre",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "accountId",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "legalEntity",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "detalles",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "estado",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "id_sistema",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				}
+			]
+		},
+		{
+			"nombre": "sistema_listas",
+			"oBean": false,
+			"filtro": "Nombre",
+			"atributos": [
+				{
+					"clase": "String",
+					"nombre": "GRUPO",
+					"ispk": true,
+					"isform": true,
+					"required": "required",
+					"maxlength": "20",
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "NORDEN",
+					"ispk": true,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "VALOR",
+					"ispk": false,
+					"isform": true,
+					"required": "required",
+					"maxlength": "20",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "TEXTO",
+					"ispk": false,
+					"isform": true,
+					"required": "required",
+					"maxlength": "200",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "DESCRIPCION",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "200",
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "ESTADO",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				}
+			]
+		},
+		{
+			"nombre": "sistema_nombre",
+			"oBean": false,
+			"filtro": "id_sistema",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "id_sistema",
+					"ispk": true,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nombre",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "descripcion",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "100",
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "estado",
+					"ispk": false,
+					"isform": true,
+					"required": "required",
+					"db": true
+				}
+			]
+		},
+		{
+			"nombre": "sistema_proveedor",
+			"oBean": false,
+			"filtro": "id_proveedor",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "id_proveedor",
+					"ispk": true,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "codProveedor",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nombre",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "accountId",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "legalEntity",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "detalles",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "500",
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "estado",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "id_sistema",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				}
+			]
+		},
+		{
+			"nombre": "sistema_secuencias",
+			"oBean": false,
+			"filtro": "Nombre",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "ID_SECUENCIA",
+					"ispk": true,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "TABLA",
+					"ispk": false,
+					"isform": true,
+					"required": "required",
+					"maxlength": "20",
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "SECUENCIA",
+					"ispk": false,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "SISTEMA",
+					"ispk": false,
+					"isform": true,
+					"db": true
 				}
 			]
 		}

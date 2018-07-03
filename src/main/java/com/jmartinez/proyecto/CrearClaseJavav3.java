@@ -7,47 +7,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import com.google.gson.Gson;
 import com.jmartinez.bean.AtributosBean;
 import com.jmartinez.bean.ClaseBean;
 import com.jmartinez.bean.ProyectoBean;
 public class CrearClaseJavav3 {
 
-	public static void main(String[] args) throws IOException {
-		String ubicacion = "../PrimerProyecto/src/main/resources/Proy01Test.json";
-		File archivojson = new File(ubicacion);
-		if (archivojson.exists()) {
-			System.out.println("Archivo encontrado");
-			String datos = readFile(ubicacion);
-			Gson gson = new Gson();
-			ProyectoBean proy = gson.fromJson(datos, ProyectoBean.class);
-			if (proy != null) {
-				// Creacion de proyecto
-				System.out.println("Nombre:" + proy.getNombreProyecto());
-				System.out.println("cantidad de archivos a crear: " + proy.getClases().size());
-				//Crear paqueteria
-				int idSec = 0;
-				for (ClaseBean clase : proy.getClases()) {
-					crearBean(proy, clase);
-					System.out.println(clase.getNombre() + ":"+clase.isoBean());
-					if(!clase.isoBean()) {
-						creanSQL(proy, clase, idSec);
-						creanDAO(proy, clase);
-						creanDAOImpl(proy, clase);
-						crearServlet(proy, clase);
-						crearHtml(proy,clase);
-						idSec++;
-					}
-				}
-				
-			} else {
-				System.out.println("Proyecto null. Terminando");
-			}
-		} else {
-			System.out.println("Archivo No encontrado");
-		}
-	}
-	private static void creanSQL(ProyectoBean proy, ClaseBean clase, int idSec) throws IOException {
+	public static void creanSQL(ProyectoBean proy, ClaseBean clase) throws IOException {
 		String prefixfile = proy.getUbicacionProyecto() + proy.getNombreProyecto() + proy.getRutafile();
 		File directorio = new File(prefixfile);
 		directorio.mkdirs();
@@ -69,13 +34,13 @@ public class CrearClaseJavav3 {
 		informacion += ");\n";
 		if(ipk!=null) {
 			informacion +="ALTER TABLE `"+clase.getNombre()+"` ADD PRIMARY KEY (`"+ipk.getNombre()+clase.getAbreviatura()+"`);\n";
-			informacion +="INSERT INTO `sistema_secuencias` (`ID_SECUENCIA`, `TABLA`, `SECUENCIA`, `SISTEMA`) VALUES ("+idSec+", '"+ipk.getNombre()+clase.getAbreviatura()+"', '99', '1');";
+			informacion +="INSERT INTO `sistema_secuencias` (`ID_SECUENCIA`, `TABLA`, `SECUENCIA`, `SISTEMA`) VALUES (0, '"+ipk.getNombre()+clase.getAbreviatura()+"', '99', '1');";
 		}
 		bw.write(informacion);
 		bw.close();
 	}
 	
-	private static void creanDAO(ProyectoBean proy, ClaseBean clase) throws IOException {
+	public static void creanDAO(ProyectoBean proy, ClaseBean clase) throws IOException {
 		String prefixfile = proy.getUbicacionProyecto() + proy.getNombreProyecto() + proy.getRutajava()
 				+ proy.getPaqueteria().replace(".", "/") + "/";
 		File directorio = new File(prefixfile+"dao/");
@@ -102,7 +67,7 @@ public class CrearClaseJavav3 {
 		//System.out.println("" + clase.getNombre() + ": creada correctamente");
 	}
 
-	private static void creanDAOImpl(ProyectoBean proy, ClaseBean clase) throws IOException {
+	public static void creanDAOImpl(ProyectoBean proy, ClaseBean clase) throws IOException {
 		String prefixfile = proy.getUbicacionProyecto() + proy.getNombreProyecto() + proy.getRutajava()
 				+ proy.getPaqueteria().replace(".", "/") + "/";
 		File directorio = new File(prefixfile+"dao/");
@@ -221,7 +186,14 @@ public class CrearClaseJavav3 {
 			}else {
 				if(element.isDb()) {
 					nombres += "\t\t\tif(";
-					nombres += element.getClase().equalsIgnoreCase("int")?"0":"null";
+					
+					if(element.getClase().equalsIgnoreCase("int")||element.getClase().equalsIgnoreCase("float")||element.getClase().equalsIgnoreCase("double")) {
+						nombres += "0";
+					}else {
+						nombres += "null";
+					}
+					
+					//nombres += element.getClase().equalsIgnoreCase("int")?"0":"null";
 					nombres +="!= dato.get"+element.getNombreClase()+"()";
 					if (!element.getAutomatico().isEmpty()) {
 						nombres += " && !dato.get"+element.getNombreClase()+"().isEmpty()";
@@ -229,7 +201,11 @@ public class CrearClaseJavav3 {
 					nombres += ")\n";
 					nombres += "\t\t\t\tsql += \" "+element.getNombre()+clase.getAbreviatura()+" = ? ,\";\n";
 					post += "\t\t\tif(";
-					post += element.getClase().equalsIgnoreCase("int")?"0":"null";
+					if(element.getClase().equalsIgnoreCase("int")||element.getClase().equalsIgnoreCase("float")||element.getClase().equalsIgnoreCase("double")) {
+						post += "0";
+					}else {
+						post += "null";
+					}
 					post +="!= dato.get"+element.getNombreClase()+"()";
 					if (!element.getAutomatico().isEmpty()) {
 						post += " && !dato.get"+element.getNombreClase()+"().isEmpty()";
@@ -313,7 +289,7 @@ public class CrearClaseJavav3 {
 		return datos;
 	}
 	
-	private static void crearBean(ProyectoBean proy, ClaseBean clase) throws IOException {
+	public static void crearBean(ProyectoBean proy, ClaseBean clase) throws IOException {
 		String prefixfile = proy.getUbicacionProyecto() + proy.getNombreProyecto() + proy.getRutajava()
 				+ proy.getPaqueteria().replace(".", "/") + "/";
 
@@ -333,18 +309,17 @@ public class CrearClaseJavav3 {
 				informacion += " = " + atributo.getAutomatico();
 			}
 			informacion += ";\n";
-			if (atributo.isIsget()) {
 				informacion += "\t" + "public " + atributo.getClase() + " get" + atributo.getNombreClase() + "() { "
 						+ "\n";
 				informacion += "\t" + "\t" + "return " + atributo.getNombre() + ";" + "\n";
 				informacion += "\t" + "}" + "\n";
-			}
-			if (atributo.isIsset()) {
+			
+			
 				informacion += "\t" + "public void set" + atributo.getNombreClase() + "(" + atributo.getClase() + " "
 						+ atributo.getNombre() + ") { " + "\n";
 				informacion += "\t" + "\t" + "this." + atributo.getNombre() + " = " + atributo.getNombre() + ";" + "\n";
 				informacion += "\t" + "}" + "\n";
-			}
+			
 		}
 		informacion += "\n";
 		informacion += "}";
@@ -353,7 +328,7 @@ public class CrearClaseJavav3 {
 		//System.out.println("" + clase.getNombre() + ": creada correctamente");
 	}
 	
-	private static void crearServlet(ProyectoBean proy, ClaseBean clase) throws IOException {
+	public static void crearServlet(ProyectoBean proy, ClaseBean clase) throws IOException {
 		String prefixfile = proy.getUbicacionProyecto() + proy.getNombreProyecto() + proy.getRutajava()
 				+ proy.getPaqueteria().replace(".", "/") + "/";
 		String paqueteria = proy.getPaqueteria();
@@ -482,7 +457,8 @@ public class CrearClaseJavav3 {
 		if(elementId!=null) {
 			informacion += "\t\t\t\tdato.set"+elementId.getNombreClase()+"("+elementId.getClasePRIn()+"request.getParameter(\""+elementId.getNombre()+"\")"+elementId.getClasePROut()+");\n";
 		}
-		informacion +="				dato.setEstado(\"99\");\n";
+		//	informacion +="				dato.setEstado(\"99\");\n";
+		informacion +="				dato.setEstado(99);\n";
 		informacion +="				dao.updateSelective(dato);\r\n" + 
 				"				res.setDescripcion(\"Eliminado correctamente\");\n";
 		informacion +="\t\t\t} else if (\"o\".equalsIgnoreCase(accion)) {\n";
@@ -513,7 +489,7 @@ public class CrearClaseJavav3 {
 	}
 	
 	
-	private static void crearHtml(ProyectoBean proy, ClaseBean clase) throws IOException {
+	public static void crearHtml(ProyectoBean proy, ClaseBean clase) throws IOException {
 		String prefixfile = proy.getUbicacionProyecto() + proy.getNombreProyecto() + proy.getRutaweb()
 				+ "/";
 		File directorio = new File(prefixfile);
@@ -917,7 +893,7 @@ public class CrearClaseJavav3 {
 		bw.close();
 	}
 	
-	private static String readFile(String file) throws IOException {
+	public static String readFile(String file) throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader((file)));
 		String line = null;
 		StringBuilder stringBuilder = new StringBuilder();
