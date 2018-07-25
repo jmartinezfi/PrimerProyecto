@@ -632,7 +632,7 @@
 		{
 			"nombre": "cosmeticos_producto",
 			"oBean": false,
-			"filtro": "Nombre",
+			"filtro": "descripcion",
 			"atributos": [
 				{
 					"clase": "int",

@@ -26,12 +26,12 @@ public class GenerarProyecto {
 				//Crear paqueteria
 				for (ClaseBean clase : proy.getClases()) {
 					System.out.println("<a href=\""+clase.getNombre()+"Form.html\">"+clase.getNombre()+"</a>");
-					CrearClaseJavav3.crearBean(proy, clase);
+					//CrearClaseJavav3.crearBean(proy, clase);
 					//System.out.println(clase.getNombre() + ":"+clase.isoBean());
 					if(!clase.isoBean()) {
-						CrearClaseJavav3.creanSQL(proy, clase);
-						CrearClaseJavav3.creanDAO(proy, clase);
-						CrearClaseJavav3.creanDAOImpl(proy, clase);
+						//CrearClaseJavav3.creanSQL(proy, clase);
+						//CrearClaseJavav3.creanDAO(proy, clase);
+						//CrearClaseJavav3.creanDAOImpl(proy, clase);
 						CrearClaseJavav3.crearServlet(proy, clase);
 						CrearClaseJavav3.crearHtml(proy,clase);
 					}

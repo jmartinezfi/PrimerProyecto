@@ -513,13 +513,16 @@ public class CrearClaseJavav3 {
 				"\r\n" + 
 				"<link rel=\"stylesheet\"\r\n" + 
 				"	href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\r\n" + 
+				"<link rel=\"stylesheet\" type=\"text/css\" href=\"css/datatable.min.css\">"+
 				"<!-- Popper JS -->\r\n" + 
 				"<script\r\n" + 
 				"	src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js\"></script>\r\n" + 
 				"\r\n" + 
-				"<!-- Latest compiled JavaScript -->\r\n" + 
+				"<!-- Latest compiled JavaScript -->\r\n" +
+				"<script type=\"text/javascript\" src=\"js/datatable.min.js\"></script>"+
 				"<script\r\n" + 
 				"	src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js\"></script>\r\n" + 
+				"<script type=\"text/javascript\" src=\"js/datatable.jquery.min.js\"></script>"+
 				"</head>\r\n" + 
 				"<body>\r\n" + 
 				"	<div class=\"container\">\r\n" + 
@@ -574,7 +577,7 @@ public class CrearClaseJavav3 {
 				"						</form>\r\n" + 
 				"					</div>\r\n" + 
 				"					<div>\r\n" + 
-				"						<table class=\"table table-striped\">\r\n" + 
+				"						<table class=\"table table-striped\"  id=\"busqueda-table\">\r\n" + 
 				"							<thead>\r\n" + 
 				"								<tr>\r\n";
 		for (AtributosBean element : clase.getAtributos()) {
@@ -588,16 +591,7 @@ public class CrearClaseJavav3 {
 				"							<tbody id=\"listado\">\r\n" + 
 				"							</tbody>\r\n" + 
 				"						</table>\r\n" + 
-				"						<nav aria-label=\"Page navigation example\">\r\n" + 
-				"							<ul class=\"pagination justify-content-end\">\r\n" + 
-				"								<li class=\"page-item disabled\"><a class=\"page-link\"\r\n" + 
-				"									href=\"#\" tabindex=\"-1\">Previous</a></li>\r\n" + 
-				"								<li class=\"page-item\"><a class=\"page-link\" href=\"#\">1</a></li>\r\n" + 
-				"								<li class=\"page-item\"><a class=\"page-link\" href=\"#\">2</a></li>\r\n" + 
-				"								<li class=\"page-item\"><a class=\"page-link\" href=\"#\">3</a></li>\r\n" + 
-				"								<li class=\"page-item\"><a class=\"page-link\" href=\"#\">Next</a></li>\r\n" + 
-				"							</ul>\r\n" + 
-				"						</nav>\r\n" + 
+				"						<div id=\"paging-first-datatable\"></div>\r\n" + 
 				"					</div>\r\n" + 
 				"				</div>\r\n" + 
 				"			</div>\r\n" + 
@@ -691,7 +685,12 @@ public class CrearClaseJavav3 {
 				"						if (json.html == null) {\r\n" + 
 				"							$('#listado').html(\"\");\r\n" + 
 				"						} else {\r\n" + 
-				"							$('#listado').html(json.html);\r\n" + 
+				"							$('#listado').html(json.html);\r\n" +
+				"                           $('#paging-first-datatable').html(\"\");\r\n" + 
+				"							var datatable = new DataTable(document.querySelector('#busqueda-table'), {\r\n" + 
+				"							    pageSize: 10,\r\n" + 
+				"							    pagingDivSelector: \"#paging-first-datatable\"\r\n" + 
+				"							});"+ 
 				"						}\r\n" + 
 				"					} else {\r\n" + 
 				"						console.log(\"Error al obtener resultados\");\r\n" + 

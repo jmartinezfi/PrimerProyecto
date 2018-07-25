@@ -65,15 +65,21 @@ public class ConexionDB {
 					AtributosBean att = new AtributosBean();
 					String claseT = rs.getString("Type");
 					String ncampo = rs.getString("Field");
-					if(ncampo.equalsIgnoreCase("nombre")){
-						existenfiltro = true;
-					}
+					
 					att.setNombre(ncampo);
 					if ("PRI".equals(rs.getString("Key"))) {
 						nfiltro = ncampo;
 						att.setIspk(true);
 					} else {
 						att.setIspk(false);
+					}
+					if(ncampo.equalsIgnoreCase("nombre")){
+						existenfiltro = true;
+						nfiltro = ncampo;
+					}
+					if(!existenfiltro&&ncampo.equalsIgnoreCase("descripcion")) {
+						existenfiltro = true;
+						nfiltro = ncampo;
 					}
 					if (rs.getString("Null").equals("NO")) {
 						att.setRequired("required");
@@ -100,12 +106,7 @@ public class ConexionDB {
 					}
 					clase.getAtributos().add(att);
 				}
-				if(existenfiltro) {
-					clase.setFiltro("Nombre");
-				}else {
-					clase.setFiltro(nfiltro);
-				}
-				
+				clase.setFiltro(nfiltro);
 				rs.close();
 				stmt.close();
 				proy.getClases().add(clase);
