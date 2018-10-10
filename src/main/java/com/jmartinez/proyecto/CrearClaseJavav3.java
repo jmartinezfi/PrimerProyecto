@@ -457,8 +457,8 @@ public class CrearClaseJavav3 {
 		if(elementId!=null) {
 			informacion += "\t\t\t\tdato.set"+elementId.getNombreClase()+"("+elementId.getClasePRIn()+"request.getParameter(\""+elementId.getNombre()+"\")"+elementId.getClasePROut()+");\n";
 		}
-		//	informacion +="				dato.setEstado(\"99\");\n";
-		informacion +="				dato.setEstado(99);\n";
+		informacion +="				dato.setEstado(\"99\");\n";
+		//informacion +="				dato.setEstado(99);\n";
 		informacion +="				dao.updateSelective(dato);\r\n" + 
 				"				res.setDescripcion(\"Eliminado correctamente\");\n";
 		informacion +="\t\t\t} else if (\"o\".equalsIgnoreCase(accion)) {\n";

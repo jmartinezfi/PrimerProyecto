@@ -1,0 +1,236 @@
+{
+	"nombreProyecto": "webexample01",
+	"ubicacionProyecto": "I:\\proyectos\\java\\gitProyects/",
+	"rutajava": "/src/main/java/",
+	"rutaweb": "/src/main/webapp/",
+	"rutafile": "/src/main/resources/",
+	"paqueteria": "com.martinez.tramites",
+	"clases": [
+		{
+			"nombre": "Resultado",
+			"oBean": true,
+			"atributos": [
+				{
+					"clase": "String",
+					"nombre": "codigo"
+				},
+				{
+					"clase": "String",
+					"nombre": "descripcion"
+				},
+				{
+					"clase": "Object",
+					"nombre": "valor"
+				},
+				{
+					"clase": "String",
+					"nombre": "html"
+				}
+			]
+		},
+		{
+			"nombre": "Tupa",
+			"filtro": "Nombre",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "ctupa",
+					"ispk": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nombre",
+					"automatico": "\"\"",
+					"required": "required",
+					"maxlength" : "100"
+				},
+				{
+					"clase": "String",
+					"nombre": "descripcion",
+					"maxlength" : "200"
+				},
+				{
+					"clase": "String",
+					"nombre": "detalle"
+				},
+				{
+					"clase": "String",
+					"nombre": "estado",
+					"isform": false
+				}
+			]
+		},
+		{
+			"nombre": "Cliente",
+			"filtro": "Nombre",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "ccliente",
+					"ispk": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nombre",
+					"automatico": "\"\"",
+					"required": "required"
+				},
+				{
+					"clase": "String",
+					"nombre": "apellido"
+				},
+				{
+					"clase": "String",
+					"nombre": "estado",
+					"automatico": "\"\"",
+					"isform": false
+				}
+			]
+		},
+		{
+			"nombre": "Tramite",
+			"filtro": "Nombre",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "ctramite",
+					"ispk": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nombre",
+					"required": "required"
+				},
+				{
+					"clase": "String",
+					"automatico": "\"\"",
+					"nombre": "descripcion"
+				},
+				{
+					"clase": "int",
+					"nombre": "cTupa",
+					"required": "required",
+					"elemento": "select", 
+					"servlet" :"Tupa",
+					"isform": false
+				},
+				{
+					"clase": "int",
+					"nombre": "cClient",
+					"required": "required",
+					"elemento": "select",
+					"servlet" :"Categoria",
+					"isform": false
+				},
+				{
+					"clase": "String",
+					"nombre": "Tupa",
+					"attdb" : "nombreTupa",
+					"join" : "codigoTupa",
+					"tabla" : "Tupa",
+					"db" : false
+				},
+				{
+					"clase": "String",
+					"nombre": "Cliente",
+					"tabla" : "Cliente",
+					"join" : "codigoClie",
+					"attdb" : "nombreClie",
+					"db" : false
+				},
+				{
+					"clase": "String",
+					"nombre": "estado",
+					"automatico": "\"\"",
+					"isform": false
+				}
+			]
+		},
+		{
+			"nombre": "Requisitos",
+			"filtro": "Nombre",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "crequisitos",
+					"ispk": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nombre",
+					"required": "required"
+				},
+				{
+					"clase": "String",
+					"automatico": "\"\"",
+					"nombre": "descripcion"
+				},
+				{
+					"clase": "int",
+					"nombre": "cTupa",
+					"required": "required",
+					"elemento": "select", 
+					"servlet" :"Tupa",
+					"isform": false
+				},
+				{
+					"clase": "String",
+					"nombre": "Tupa",
+					"attdb" : "nombreTupa",
+					"join" : "cTupa",
+					"tabla" : "Tupa",
+					"db" : false
+				},
+				{
+					"clase": "String",
+					"nombre": "estado",
+					"automatico": "\"\"",
+					"isform": false
+				}
+			]
+		},
+		{
+			"nombre": "ReTramite",
+			"filtro": "Nombre",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "cretramite",
+					"ispk": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nombre",
+					"required": "required"
+				},
+				{
+					"clase": "String",
+					"automatico": "\"\"",
+					"nombre": "descripcion"
+				},
+				{
+					"clase": "int",
+					"nombre": "cTramite",
+					"required": "required",
+					"elemento": "select", 
+					"servlet" :"Tramite",
+					"isform": false
+				},
+				{
+					"clase": "String",
+					"nombre": "Tramite",
+					"attdb" : "nombreTramite",
+					"join" : "cTramite",
+					"tabla" : "Tramite",
+					"db" : false
+				},
+				{
+					"clase": "String",
+					"nombre": "estado",
+					"automatico": "\"\"",
+					"isform": false
+				}
+			]
+		}
+	]
+}
