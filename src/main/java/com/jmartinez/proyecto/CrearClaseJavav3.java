@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Date;
 
 import com.jmartinez.bean.AtributosBean;
 import com.jmartinez.bean.ClaseBean;
@@ -79,6 +80,9 @@ public class CrearClaseJavav3 {
 		String nombreBean = ""+proy.getPaqueteria()+".bean."+nombreClase+"Bean";
 		bw = new BufferedWriter(new FileWriter(archivo));
 		informacion += "package " + proy.getPaqueteria() + ".dao";
+		informacion += ";\n";
+		
+		informacion +="import java.util.Date;";
 		informacion += ";\n";
 		informacion += "public class " + nombreClase + "DaoImpl extends ConexionDB implements "+nombreClase+"Dao { " + "\n";
 		informacion += "\tpublic void insert ("+nombreBean+" dato){\n";
@@ -159,6 +163,9 @@ public class CrearClaseJavav3 {
 				nombres +=element.getNombre()+clase.getAbreviatura()+",";
 				indices +="?,";
 				funcionalidad += "\t\t\tpstm.set"+element.getClaseDB()+"("+i+", ";
+				if(element.getClaseDB().equalsIgnoreCase("date")) {
+					funcionalidad += "(java.sql.Date)";
+				}
 				funcionalidad += element.isIspk()?"getSecuencia(\""+element.getNombre()+clase.getAbreviatura()+"\")":"dato.get"+element.getNombreClase()+"()";
 				funcionalidad += ");\n";
 				i++;
@@ -211,7 +218,11 @@ public class CrearClaseJavav3 {
 						post += " && !dato.get"+element.getNombreClase()+"().isEmpty()";
 					}
 					post += ")\n";
-					post += "\t\t\t\tpstm.set"+element.getClaseDB()+"(i++, dato.get"+element.getNombreClase()+"());\n";
+					post += "\t\t\t\tpstm.set"+element.getClaseDB()+"(i++, ";
+					if(element.getClase().equalsIgnoreCase("date")) {
+						post += "(java.sql.Date)";
+					}
+					post +="dato.get"+element.getNombreClase()+"());\n";
 				
 				}
 			}
@@ -302,6 +313,8 @@ public class CrearClaseJavav3 {
 		bw = new BufferedWriter(new FileWriter(archivo));
 		informacion += "package " + proy.getPaqueteria() + ".bean";
 		informacion += ";\n";
+		informacion +="import java.util.Date;";
+		informacion += ";\n";
 		informacion += "public class " + nombreClase + "Bean { " + "\n";
 		for (AtributosBean atributo : clase.getAtributos()) {
 			informacion += "\t" + "private " + atributo.getClase() + " " + atributo.getNombre() + "";
@@ -325,7 +338,7 @@ public class CrearClaseJavav3 {
 		informacion += "}";
 		bw.write(informacion);
 		bw.close();
-		//System.out.println("" + clase.getNombre() + ": creada correctamente");
+		System.out.println("" + clase.getNombre() + ": creada correctamente" + archivo);
 	}
 	
 	public static void crearServlet(ProyectoBean proy, ClaseBean clase) throws IOException {

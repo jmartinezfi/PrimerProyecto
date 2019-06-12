@@ -13,7 +13,8 @@ public class GenerarProyecto {
 		// TODO Auto-generated method stub
 		//String ubicacion = "../PrimerProyecto/src/main/resources/Proy01Test.json";
 		//String ubicacion = "../PrimerProyecto/src/test/resources/test.json";
-		String ubicacion = "../PrimerProyecto/src/main/resources/ProyTram001.json";
+		//String ubicacion = "../PrimerProyecto/src/main/resources/ProyTram001.json";
+		String ubicacion = "../PrimerProyecto/src/main/resources/soporte.json";
 		File archivojson = new File(ubicacion);
 		if (archivojson.exists()) {
 			System.out.println("Archivo encontrado");
@@ -36,6 +37,7 @@ public class GenerarProyecto {
 						CrearClaseJavav3.crearServlet(proy, clase);
 						CrearClaseJavav3.crearHtml(proy,clase);
 					}
+					System.out.println("<a href=\""+clase.getNombre()+"Form.html\">"+clase.getNombre()+"</a>");
 				}
 				
 			} else {

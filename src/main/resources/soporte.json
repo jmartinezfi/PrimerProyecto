@@ -1,0 +1,431 @@
+{
+	"nombreProyecto": "SoporteWS",
+	"ubicacionProyecto": "C:\\jmartinez\\wspJC\\",
+	"rutajava": "/src/",
+	"rutaweb": "/WebContent/",
+	"rutafile": "/src/",
+	"paqueteria": "com.inspira",
+	"clases": [
+		{
+			"nombre": "base_conocimiento",
+			"oBean": false,
+			"filtro": "num_correlativo",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "num_correlativo",
+					"ispk": true,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nombre_infraestructura",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nombre_proveedor",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nombre_fabricante",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "tipo_producto",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nombre_producto",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "asunto_problema",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "2000",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "codigo_error",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "descripcion_solucion",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "2000",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "pasos_solucion",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "2000",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nivel_ticket",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "30",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "tiempo_total_atencion",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "30",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nombre_colaborador",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				}
+			]
+		},
+		{
+			"nombre": "cliente",
+			"oBean": false,
+			"filtro": "id_cliente",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "id_cliente",
+					"ispk": true,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "ruc_cliente",
+					"ispk": false,
+					"isform": true,
+					"required": "required",
+					"maxlength": "11",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nombre_cliente",
+					"ispk": false,
+					"isform": true,
+					"required": "required",
+					"maxlength": "20",
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "num_proyectos",
+					"ispk": false,
+					"isform": true,
+					"required": "required",
+					"db": true
+				}
+			]
+		},
+		{
+			"nombre": "colaborador",
+			"oBean": false,
+			"filtro": "id_colaborador",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "id_colaborador",
+					"ispk": true,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nombre_colaborador",
+					"ispk": false,
+					"isform": true,
+					"required": "required",
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "correo_colaborador",
+					"ispk": false,
+					"isform": true,
+					"required": "required",
+					"maxlength": "50",
+					"db": true
+				}
+			]
+		},
+		{
+			"nombre": "contrato",
+			"oBean": false,
+			"filtro": "id_contrato",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "id_contrato",
+					"ispk": true,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "id_cliente",
+					"ispk": false,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nombre_proyecto",
+					"ispk": false,
+					"isform": true,
+					"required": "required",
+					"maxlength": "100",
+					"db": true
+				},
+				{
+					"clase": "Date",
+					"nombre": "fecha_finalizacion_contrato",
+					"ispk": false,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "estado_contrato",
+					"ispk": false,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "num_horas_soporte",
+					"ispk": false,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "descripcion_proyecto",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "100",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "jefe_proyecto",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "100",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nomenglatura_contrato",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "tipo_servicio",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "tipo_proyecto",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "50",
+					"db": true
+				}
+			]
+		},
+		{
+			"nombre": "perfil",
+			"oBean": false,
+			"filtro": "id_perfil",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "id_perfil",
+					"ispk": true,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nombre_colaborador",
+					"ispk": false,
+					"isform": true,
+					"required": "required",
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "perfil_colaborador",
+					"ispk": false,
+					"isform": true,
+					"required": "required",
+					"maxlength": "50",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nombre_producto",
+					"ispk": false,
+					"isform": true,
+					"required": "required",
+					"maxlength": "50",
+					"db": true
+				}
+			]
+		},
+		{
+			"nombre": "ticket",
+			"oBean": false,
+			"filtro": "id_ticket",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "id_ticket",
+					"ispk": true,
+					"isform": true,
+					"required": "required",
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "id_contrato",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "int",
+					"nombre": "num_ticket",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "correo_solicitante",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "30",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "asunto_ticket",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "100",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "estado_ticket",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "15",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nivel_ticket",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "20",
+					"db": true
+				},
+				{
+					"clase": "Date",
+					"nombre": "hinicio_ticket",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "correo_colaborador",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "30",
+					"db": true
+				},
+				{
+					"clase": "String",
+					"nombre": "copia_correo",
+					"ispk": false,
+					"isform": true,
+					"maxlength": "200",
+					"db": true
+				},
+				{
+					"clase": "Date",
+					"nombre": "hderivo_colaborador",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				},
+				{
+					"clase": "Date",
+					"nombre": "hfinal_ticket",
+					"ispk": false,
+					"isform": true,
+					"db": true
+				}
+			]
+		}
+	]
+}
