@@ -1,0 +1,53 @@
+{
+	"nombreProyecto": "ang4la40o1",
+	"ubicacionProyecto": "E:\\Documents\\GitHub\\",
+	"rutajava": "/src/main/java/",
+	"rutaweb": "/src/main/webapp/",
+	"rutafile": "/src/main/resources/",
+	"paqueteria": "com.martinez.proyectoVentas",
+	"clases": [
+		
+		{
+			"nombre": "Unidad",
+			"filtro": "Nombre",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "codi",
+					"ispk": true
+				},
+				{
+					"clase": "int",
+					"nombre": "cantidad"
+				},
+				{
+					"clase": "String",
+					"automatico": "\"\"",
+					"nombre": "fecha"
+				},
+				{
+					"clase": "int",
+					"nombre": "codigo",
+					"required": "required",
+					"elemento": "select", 
+					"servlet" :"Producto",
+					"isform": false
+				},
+				{
+					"clase": "String",
+					"nombre": "Producto",
+					"attdb" : "nombre",
+					"join" : "codigo",
+					"tabla" : "Producto",
+					"db" : false
+				},
+				{
+					"clase": "String",
+					"nombre": "estado",
+					"automatico": "\"\"",
+					"isform": false
+				}
+			]
+		}
+	]
+}

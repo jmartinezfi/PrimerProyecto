@@ -1,0 +1,85 @@
+{
+	"nombreProyecto": "ang4la40o1",
+	"ubicacionProyecto": "E:\\Documents\\GitHub\\",
+	"rutajava": "/src/main/java/",
+	"rutaweb": "/src/main/webapp/",
+	"rutafile": "/src/main/resources/",
+	"paqueteria": "com.martinez.proyectoVentas",
+	"clases": [
+		
+		{
+			"nombre": "Producto",
+			"filtro": "Nombre",
+			"atributos": [
+				{
+					"clase": "int",
+					"nombre": "codigo",
+					"ispk": true
+				},
+				{
+					"clase": "String",
+					"nombre": "nombre",
+					"required": "required"
+				},
+				{
+					"clase": "String",
+					"automatico": "\"\"",
+					"nombre": "descripcion"
+				},
+				{
+					"clase": "String",
+					"automatico": "\"\"",
+					"nombre": "codnat"
+				},
+				{
+					"clase": "String",
+					"automatico": "\"\"",
+					"nombre": "precio"
+				},
+				{
+					"clase": "int",
+					"automatico": "\"\"",
+					"nombre": "puntos"
+				},
+				{
+					"clase": "int",
+					"nombre": "codigoMarc",
+					"required": "required",
+					"elemento": "select", 
+					"servlet" :"Marca",
+					"isform": false
+				},
+				{
+					"clase": "int",
+					"nombre": "codigoCate",
+					"required": "required",
+					"elemento": "select",
+					"servlet" :"Categoria",
+					"isform": false
+				},
+				{
+					"clase": "String",
+					"nombre": "Marca",
+					"attdb" : "nombreMarc",
+					"join" : "codigoMarc",
+					"tabla" : "Marca",
+					"db" : false
+				},
+				{
+					"clase": "String",
+					"nombre": "Categoria",
+					"tabla" : "Categoria",
+					"join" : "codigoCate",
+					"attdb" : "nombreCate",
+					"db" : false
+				},
+				{
+					"clase": "String",
+					"nombre": "estado",
+					"automatico": "\"\"",
+					"isform": false
+				}
+			]
+		}
+	]
+}

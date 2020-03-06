@@ -14,7 +14,9 @@ public class GenerarProyecto {
 		//String ubicacion = "../PrimerProyecto/src/main/resources/Proy01Test.json";
 		//String ubicacion = "../PrimerProyecto/src/test/resources/test.json";
 		//String ubicacion = "../PrimerProyecto/src/main/resources/ProyTram001.json";
-		String ubicacion = "../PrimerProyecto/src/main/resources/soporte.json";
+		//String ubicacion = "../PrimerProyecto/src/main/resources/soporte.json";
+		
+		String ubicacion = "../PrimerProyecto/src/main/resources/ProyNatura02.json";
 		File archivojson = new File(ubicacion);
 		if (archivojson.exists()) {
 			System.out.println("Archivo encontrado");
